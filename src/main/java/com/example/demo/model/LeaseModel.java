@@ -64,7 +64,7 @@ public class LeaseModel {
         return id;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
@@ -72,13 +72,10 @@ public class LeaseModel {
         return totalPrice;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public Long getCustomerId() {
-        return customerId;
-    }
 
     public String getVinId() {
         return vinId;
