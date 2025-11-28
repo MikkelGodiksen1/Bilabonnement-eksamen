@@ -1,18 +1,17 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.LeaseRequest;
 import com.example.demo.model.CustomerModel;
 import com.example.demo.model.LeaseModel;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.repository.LeaseRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@RequestMapping("/lease")
 public class LeaseController {
 
 
@@ -27,28 +26,31 @@ public class LeaseController {
     }
 
 
-    @GetMapping("/lease")
-    public String lease() {
+    @GetMapping
+    public String showLeaseForm(Model model) {
+        model.addAttribute("leaseRequest", new LeaseRequest());
         return "pages/lease";
     }
 
-    @PostMapping("/lease")
-    public String CreateLeaseAndAddToDB(@ModelAttribute LeaseModel lease, @RequestParam Long customerId, Model model) {
+    @PostMapping
+    public String CreateLeaseAndAddToDB(@ModelAttribute LeaseRequest leaseRequest, Model model) {
 
-        CustomerModel customer = customerRepository.findById(customerId).orElseThrow(() ->
-                new IllegalArgumentException("Customer not found"));
-
-        lease.setCustomer(customer);
-    
         try {
 
+            CustomerModel customer = customerRepository.save(leaseRequest.getCustomer());
+
+            LeaseModel lease = leaseRequest.getLease();
+            lease.setCustomer(customer);
 
             leaseRepository.save(lease);
+
             model.addAttribute("lease", lease);
             model.addAttribute("success", true);
         } catch (Exception e) {
             model.addAttribute("success", false);
         }
+
+        model.addAttribute("leaseRequest", new LeaseRequest());
         return "pages/lease";
     }
 

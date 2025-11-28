@@ -11,29 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/customers")
+
+//Siden customer gemmes via oprettelsen af et lease er customercontroller ikke brugt.
+//Opfylder ikke SOLID men jf. kravspecifikationer giver seperat customer oprettelse ikke mening.
+
 public class CustomerController {
 
-    private final CustomerRepository customerRepository;
 
-
-    public CustomerController(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
-
-    @GetMapping("/lease")
-    public String showCustomerForm(Model model) {
-        model.addAttribute("customer", new CustomerModel());
-        return "pages/lease";
-    }
-
-    @PostMapping("/lease")
-    public String CreateCustomer(@ModelAttribute CustomerModel customerModel, Model model) {
-
-        customerRepository.save(customerModel);
-        model.addAttribute("customer", customerModel);
-        return "customer";
-    }
 
 
 }
