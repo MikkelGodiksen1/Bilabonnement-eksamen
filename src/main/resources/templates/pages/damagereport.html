@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Damage Report</title>
+</head>
+<body>
+
+<form th:action="@{/damage/save}" th:object="${damageReport}" method="post">
+
+    <label>Damage Date:</label>
+    <input type="date" th:field="*{damage_date}" required>
+
+    <label>Description:</label>
+    <input type="text" th:field="*{description}" required>
+
+    <label>Repair Cost:</label>
+    <input type="number" step="0.01" th:field="*{repair_cost}" required>
+
+    <label>VIN ID:</label>
+    <input type="text" th:field="*{vin_id}" required>
+
+    <label>Employee ID:</label>
+    <input type="number" th:field="*{employee_id}" required>
+
+    <label>Lease ID:</label>
+    <input type="number" th:field="*{lease_id}" required>
+
+    <label>KM Slut:</label>
+    <input type="number" th:field="*{km_slut}" required>
+
+    <button type="submit">Save Report</button>
+</form>
+
+</body>
+</html>

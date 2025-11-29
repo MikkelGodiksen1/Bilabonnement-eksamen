@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc63d975-b925-4995-bd31-272d436960eb" name="Changes" comment="Fixed nogen date attributtes som lavede problemer">
-      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/pages/damagereport.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +15,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -117,6 +117,9 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StructureViewState">
+    <option name="selectedTab" value="Physical" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="cc63d975-b925-4995-bd31-272d436960eb" name="Changes" comment="" />
@@ -127,7 +130,7 @@
       <workItem from="1764253584158" duration="336000" />
       <workItem from="1764253938965" duration="2613000" />
       <workItem from="1764414247728" duration="12015000" />
-      <workItem from="1764435163101" duration="93000" />
+      <workItem from="1764435163101" duration="165000" />
     </task>
     <task id="LOCAL-00001" summary="Oprettet Customer controller model og repo samt lease controller model og repo. Nu skal det bare prøves af for at se om det virker. Til hvem end der gennemgår det her commit glhf.">
       <option name="closed" value="true" />
@@ -145,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764339244159</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed nogen date attributtes som lavede problemer">
+      <option name="closed" value="true" />
+      <created>1764435264931</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1764435264931</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
