@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuværende udlejninger</title>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a th:href="@{/lease}">Opret Lejekontrakt</a>
+    <a th:href="@{/lease/current}">Se nuværende udlejninger</a>
+    <a th:href="@{/login}">Log ud</a>
+  </nav>
+</header>
+
+<h1>Nuværende udlejninger</h1>
+
+<section>
+  <table border="1" cellpadding="6" cellspacing="0">
+    <thead>
+    <tr>
+      <th>Reg. nr.</th>
+      <th>Mærke</th>
+      <th>Model</th>
+      <th>Kunde</th>
+      <th>Tlf.</th>
+      <th>Startdato</th>
+      <th>Slutdato</th>
+      <th>Pris</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="lease : ${currentLeases}">
+      <td th:text="${lease.vehicle.registrationNo}">AB12345</td>
+      <td th:text="${lease.vehicle.brand}">Brand</td>
+      <td th:text="${lease.vehicle.model}">Model</td>
+      <td th:text="${lease.customer.firstName + ' ' + lease.customer.lastName}">Fornavn Efternavn</td>
+      <td th:text="${lease.customer.phone}">00000000</td>
+      <td th:text="${lease.startDate}">2025-01-01</td>
+      <td th:text="${lease.endDate}">2025-12-31</td>
+      <td th:text="${lease.totalPrice}">0.00</td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(currentLeases)}">
+      <td colspan="8">Ingen aktive udlejninger</td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<aside>
+  <p>
+    <strong>Total pris for alle nuværende udlejninger:</strong>
+    <span th:text="${currentLeasesTotalPrice}">0.00</span>
+  </p>
+  <p>
+    <strong>Totale antal af udlejede køretøjer:</strong>
+    <span th:text="${currentLeasesCount}">0</span>
+  </p>
+</aside>
+
+</body>
+</html>
+
+

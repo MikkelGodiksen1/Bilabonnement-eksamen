@@ -6,6 +6,8 @@ import com.example.demo.model.CustomerModel;
 import com.example.demo.model.LeaseModel;
 import com.example.demo.repository.*;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
+import java.util.List;
 
 
 @Service
@@ -58,6 +60,17 @@ public class LeaseService {
     }
     public double getTotalLeasePrice() {
         return leaseJDBCRepository.getTotalLeasePrice();
+    }
+
+    public List<LeaseModel> getCurrentLeases() {
+        LocalDate today = LocalDate.now();
+        return leaseRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqual(today, today);
+    }
+
+    public double getCurrentLeasesTotalPrice() {
+        return getCurrentLeases().stream()
+                .mapToDouble(LeaseModel::getTotalPrice)
+                .sum();
     }
 
 

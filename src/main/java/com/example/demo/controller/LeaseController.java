@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.DTO.LeaseRequest;
-import com.example.demo.repository.CustomerJDBCRepository;
-import com.example.demo.repository.LeaseJDBCRepository;
 import com.example.demo.service.LeaseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +22,15 @@ public class LeaseController {
     public String showLeaseForm(Model model) {
         model.addAttribute("leaseRequest", new LeaseRequest());
         return "pages/lease";
+    }
+
+    @GetMapping("/current")
+    public String showCurrentLeases(Model model) {
+        var currentLeases = leaseService.getCurrentLeases();
+        model.addAttribute("currentLeases", currentLeases);
+        model.addAttribute("currentLeasesTotalPrice", leaseService.getCurrentLeasesTotalPrice());
+        model.addAttribute("currentLeasesCount", currentLeases.size());
+        return "pages/currentleasingcontracts";
     }
 
     // Create lease håndteres igennem leaseRequst da formen indeholder både data for lease og customer
