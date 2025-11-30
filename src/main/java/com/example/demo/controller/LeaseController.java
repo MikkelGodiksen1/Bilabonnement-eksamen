@@ -23,7 +23,9 @@ public class LeaseController {
     @GetMapping
     public String showLeaseForm(Model model) {
         model.addAttribute("leaseRequest", new LeaseRequest());
+        model.addAttribute("totalLeasePrice", leaseService.getTotalLeasePrice());
         return "pages/lease";
+
     }
 
     // Create lease håndteres igennem leaseRequst da formen indeholder både data for lease og customer
@@ -62,6 +64,7 @@ public class LeaseController {
             model.addAttribute("success", false);
             model.addAttribute("errorMessage", "unexpected error");
         }
+        model.addAttribute("totalLeasePrice", leaseService.getTotalLeasePrice());
         return "pages/lease";
     }
 

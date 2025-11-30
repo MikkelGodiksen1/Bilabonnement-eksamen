@@ -53,5 +53,9 @@ public class LeaseService {
         leaseJDBCRepository.saveLeaseJDBC(leaseRequest, customerId, vehicleId);
 
     }
+    public double getTotalLeasePrice() {
+        return leaseJDBCRepository.getTotalLeasePrice();
+    }
+
 
 }
