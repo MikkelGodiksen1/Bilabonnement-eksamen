@@ -1,0 +1,434 @@
+/* 
+ * Damage Report Page Styles - Mockup Design
+ * Dark theme styling matching the provided mockup design
+ * Implements a two-column layout with form on left and damage list on right
+ */
+
+/* ============================================
+   Global Body Styles
+   ============================================ */
+/* Base body styling with dark background and grid pattern */
+body {
+    margin: 0;
+    padding: 0;
+    /* Dark gray background color matching mockup */
+    background-color: #2a2a2a;
+    /* Subtle grid pattern overlay using linear gradients */
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    /* Grid cell size - creates 20x20px pattern */
+    background-size: 20px 20px;
+    color: white;
+    /* Modern system font stack for cross-platform consistency */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    /* Ensure full viewport height */
+    min-height: 100vh;
+}
+
+/* ============================================
+   Header Styles
+   ============================================ */
+/* Main header container with dark background */
+.main-header {
+    background-color: #2a2a2a;
+    padding: 15px 30px;
+    /* Subtle bottom border for separation */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Flexbox container for header content - logo, nav, logout */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Logo section containing icon and text */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Clock icon styling */
+.logo-icon {
+    font-size: 24px;
+}
+
+/* Container for logo text elements */
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main logo text - company name */
+.logo-main {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+/* Subtitle text below main logo */
+.logo-sub {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Navigation menu container */
+.header-nav {
+    display: flex;
+    gap: 10px;
+}
+
+/* Navigation button styling - white bordered buttons */
+.nav-btn {
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    /* Smooth transition for hover effects */
+    transition: background-color 0.3s;
+}
+
+/* Hover state for navigation buttons */
+.nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Active/current page button styling */
+.nav-btn.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-width: 2px;
+}
+
+/* Logout button styling - darker background to distinguish from nav buttons */
+.logout-btn {
+    padding: 10px 20px;
+    background-color: #4a4a4a;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover state for logout button */
+.logout-btn:hover {
+    background-color: #5a5a5a;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+/* Main page container with centered content and max width */
+.damage-report-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* Page title styling */
+.page-title {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: white;
+    font-weight: 500;
+}
+
+/* Two-column grid layout wrapper */
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* ============================================
+   Left Column - Damage Registration Form
+   ============================================ */
+/* Left column container with semi-transparent background */
+.left-column {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 8px;
+}
+
+/* Form container with vertical flex layout */
+.damage-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form group container for label and input pairs */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Label styling for form fields */
+.form-group label {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Input field styling - text, number, date, and textarea */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea {
+    background-color: #4a4a4a;
+    border: 1px solid #666;
+    color: white;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+/* Focus state for input fields - white border highlight */
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="date"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: white;
+}
+
+/* Textarea specific styling - allows vertical resizing */
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* ============================================
+   Right Column - Damage List and Summary
+   ============================================ */
+/* Right column container with vertical flex layout */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Section for adding new damage items */
+.add-damage-section {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Grid layout for damage input fields and add button */
+.add-damage-inputs {
+    display: grid;
+    /* Three columns: description (2fr), price (1fr), button (auto width) */
+    grid-template-columns: 2fr 1fr auto;
+    gap: 15px;
+    /* Align items to bottom for better visual alignment */
+    align-items: end;
+}
+
+/* Input group container for label and input */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Label styling for input groups */
+.input-group label {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Input field styling in add damage section */
+.input-group input {
+    background-color: #4a4a4a;
+    border: 1px solid #666;
+    color: white;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+/* Focus state for input group inputs */
+.input-group input:focus {
+    outline: none;
+    border-color: white;
+}
+
+/* Button for adding a fault/damage to the list */
+.btn-add-fault {
+    background-color: #2a2a2a;
+    border: 1px solid white;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+    /* Prevent text wrapping */
+    white-space: nowrap;
+}
+
+/* Hover state for add fault button */
+.btn-add-fault:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Arrow icon styling inside button */
+.arrow {
+    font-size: 10px;
+}
+
+/* Section containing the damage list table */
+.damage-list-section {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Table styling for damage list */
+.damage-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+/* Table header styling with bottom border */
+.damage-table thead {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Table header cell styling */
+.damage-table th {
+    text-align: left;
+    padding: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+}
+
+/* Table data cell styling */
+.damage-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+}
+
+/* Remove border from last row in table body */
+.damage-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Total price section container */
+.total-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Label for total price field */
+.total-section label {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Total price input field - read-only display */
+.total-section input {
+    background-color: #4a4a4a;
+    border: 1px solid #666;
+    color: white;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    width: 100%;
+    /* Include padding and border in width calculation */
+    box-sizing: border-box;
+}
+
+/* Main submit button for registering damage report */
+.btn-register-damage {
+    background-color: #2a2a2a;
+    border: 2px solid white;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    /* Align to right side of container */
+    align-self: flex-end;
+    /* Smooth transitions for hover and active states */
+    transition: background-color 0.3s, transform 0.1s;
+    /* Subtle shadow for 3D effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover state - slight lift effect */
+.btn-register-damage:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Active/pressed state - return to original position */
+.btn-register-damage:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   Responsive Design - Tablet and Mobile
+   ============================================ */
+/* Tablet breakpoint - stack columns vertically */
+@media (max-width: 1024px) {
+    /* Change to single column layout */
+    .content-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    /* Stack add damage inputs vertically on smaller screens */
+    .add-damage-inputs {
+        grid-template-columns: 1fr;
+    }
+
+    /* Make add button full width */
+    .btn-add-fault {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Mobile breakpoint - adjust header and spacing */
+@media (max-width: 768px) {
+    /* Stack header content vertically */
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Allow navigation links to wrap */
+    .header-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Reduce padding on mobile */
+    .damage-report-page {
+        padding: 15px;
+    }
+}

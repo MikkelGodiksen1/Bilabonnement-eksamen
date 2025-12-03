@@ -1,36 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- 
+    Damage Report Page - HTML Template
+    This page allows users to register vehicle damage reports with a two-column layout:
+    Left column: Main damage registration form
+    Right column: Dynamic damage list with add/remove functionality
+-->
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Meta tags for character encoding and responsive viewport -->
     <meta charset="UTF-8">
-    <title>Damage Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrer skade</title>
+    
+    <!-- External stylesheets for header and damage report page styling -->
+    <link th:href="@{/css/header_style.css}" rel="stylesheet">
+    <link th:href="@{/css/damagereport_style.css}" rel="stylesheet">
 </head>
 <body>
+    <!-- Main header section with logo, navigation, and logout button -->
+    <header class="main-header">
+        <div class="header-content">
+            <!-- Logo section with icon and company name -->
+            <div class="logo-section">
+                <div class="logo-icon">🕐</div>
+                <div class="logo-text">
+                    <div class="logo-main">BILABONNEMENT</div>
+                    <div class="logo-sub">K.W. BRUUN</div>
+                </div>
+            </div>
+            
+            <!-- Navigation menu with links to different pages -->
+            <nav class="header-nav">
+                <a th:href="@{/lease}" class="nav-btn">Opret Lejekontrakt</a>
+                <a th:href="@{/damagereport}" class="nav-btn active">Registrer skade</a>
+                <a th:href="@{/currentleasingcontracts}" class="nav-btn">Se nuværende udlejninger</a>
+            </nav>
+            
+            <!-- Logout button positioned on the right side of header -->
+            <button class="logout-btn">Log ud</button>
+        </div>
+    </header>
 
-<form th:action="@{/damage/save}" th:object="${damageReport}" method="post">
+    <!-- Main content area for the damage report page -->
+    <main class="damage-report-page">
+        <h1 class="page-title">Registrer skade</h1>
+        
+        <!-- Two-column layout wrapper -->
+        <div class="content-wrapper">
+            <!-- Left Column: Main damage registration form -->
+            <div class="left-column">
+                <!-- 
+                    Form for submitting damage report data to backend
+                    Uses Thymeleaf object binding to map form fields to damageReport model
+                -->
+                <form id="damage-form" th:action="@{/damage/save}" th:object="${damageReport}" method="post" class="damage-form">
+                    <!-- VIN number input field - Vehicle Identification Number -->
+                    <div class="form-group">
+                        <label for="vin_id">Stelnummer</label>
+                        <input type="text" th:field="*{vin_id}" id="vin_id" required>
+                    </div>
 
-    <label>Damage Date:</label>
-    <input type="date" th:field="*{damage_date}" required>
+                    <!-- Employee ID input field - identifies which employee is registering the damage -->
+                    <div class="form-group">
+                        <label for="employee_id">Medarbejder nr.</label>
+                        <input type="number" th:field="*{employee_id}" id="employee_id" required>
+                    </div>
 
-    <label>Description:</label>
-    <input type="text" th:field="*{description}" required>
+                    <!-- Date picker for when the damage was discovered -->
+                    <div class="form-group">
+                        <label for="damage_date">Dato for skadens udfindelse</label>
+                        <input type="date" th:field="*{damage_date}" id="damage_date" required>
+                    </div>
 
-    <label>Repair Cost:</label>
-    <input type="number" step="0.01" th:field="*{repair_cost}" required>
+                    <!-- Textarea for detailed description of the damage -->
+                    <div class="form-group">
+                        <label for="description">Beskrivelse af skader</label>
+                        <textarea th:field="*{description}" id="description" rows="6" required></textarea>
+                    </div>
+                    
+                    <!-- Hidden fields for backend processing - not visible to user -->
+                    <!-- Lease ID: Links damage report to a specific lease contract -->
+                    <input type="hidden" th:field="*{lease_id}" id="lease_id" value="1">
+                    <!-- End mileage: Final kilometers when damage was reported -->
+                    <input type="hidden" th:field="*{km_slut}" id="km_slut" value="0">
+                    <!-- Repair cost: Automatically calculated from damage list, updated via JavaScript -->
+                    <input type="hidden" th:field="*{repair_cost}" id="repair_cost">
+                </form>
+            </div>
 
-    <label>VIN ID:</label>
-    <input type="text" th:field="*{vin_id}" required>
+            <!-- Right Column: Dynamic damage list and summary -->
+            <div class="right-column">
+                <!-- Section for adding individual damage items to the list -->
+                <div class="add-damage-section">
+                    <div class="add-damage-inputs">
+                        <!-- Input field for damage description/fault -->
+                        <div class="input-group">
+                            <label for="fault_description">Fejl</label>
+                            <input type="text" id="fault_description" placeholder="">
+                        </div>
+                        
+                        <!-- Input field for damage price/cost -->
+                        <div class="input-group">
+                            <label for="fault_price">Pris</label>
+                            <input type="number" step="0.01" id="fault_price" placeholder="" min="0">
+                        </div>
+                        
+                        <!-- Button to add the damage item to the table below -->
+                        <button type="button" class="btn-add-fault" id="addFaultBtn">
+                            tilføj fejl
+                            <span class="arrow">▶</span>
+                        </button>
+                    </div>
+                </div>
 
-    <label>Employee ID:</label>
-    <input type="number" th:field="*{employee_id}" required>
+                <!-- Section displaying the list of registered damages in a table -->
+                <div class="damage-list-section">
+                    <table class="damage-table">
+                        <thead>
+                            <tr>
+                                <th>Fejl</th>
+                                <th>Beskrivelse</th>
+                                <th>Pris</th>
+                            </tr>
+                        </thead>
+                        <!-- 
+                            Table body where damage items are dynamically added via JavaScript
+                            Contains sample data that will be replaced/added to by user interaction
+                        -->
+                        <tbody id="damageTableBody">
+                            <!-- Sample damage entries - will be dynamically managed via JavaScript -->
+                            <tr>
+                                <td>1</td>
+                                <td>Ridse venstre dør</td>
+                                <td>2300,-</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Skade på ret</td>
+                                <td>1200,-</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>ridse i kofanger</td>
+                                <td>700,-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-    <label>Lease ID:</label>
-    <input type="number" th:field="*{lease_id}" required>
+                <!-- Total price section - displays sum of all damage costs -->
+                <div class="total-section">
+                    <label for="total_price">Samlet pris for udbedring</label>
+                    <!-- Read-only input showing formatted total price, updated automatically -->
+                    <input type="text" id="total_price" readonly value="4200,-">
+                </div>
 
-    <label>KM Slut:</label>
-    <input type="number" th:field="*{km_slut}" required>
+                <!-- Submit button for the form - positioned outside form but linked via form attribute -->
+                <button type="submit" form="damage-form" class="btn-register-damage">Registrer skade</button>
+            </div>
+        </div>
+    </main>
 
-    <button type="submit">Save Report</button>
-</form>
+    <!-- JavaScript for dynamic damage list management and price calculation -->
+    <script>
+        /**
+         * Event listener for the "Add Fault" button
+         * Adds a new row to the damage table when user clicks the button
+         * Validates that both description and price are provided before adding
+         */
+        document.getElementById('addFaultBtn').addEventListener('click', function() {
+            // Get input values from the form fields
+            const faultDesc = document.getElementById('fault_description').value;
+            const faultPrice = document.getElementById('fault_price').value;
+            
+            // Only add row if both fields have values
+            if (faultDesc && faultPrice) {
+                const tbody = document.getElementById('damageTableBody');
+                const rowCount = tbody.rows.length;
+                
+                // Create new table row
+                const newRow = tbody.insertRow();
+                
+                // Insert cells: fault number (sequential), description, and formatted price
+                newRow.insertCell(0).textContent = rowCount + 1;
+                newRow.insertCell(1).textContent = faultDesc;
+                // Format price with Danish locale (comma as decimal separator) and add currency suffix
+                newRow.insertCell(2).textContent = parseFloat(faultPrice).toLocaleString('da-DK') + ',-';
+                
+                // Clear input fields after successful addition
+                document.getElementById('fault_description').value = '';
+                document.getElementById('fault_price').value = '';
+                
+                // Recalculate and update the total price
+                updateTotalPrice();
+            }
+        });
+
+        /**
+         * Calculates the total price of all damages in the table
+         * Updates both the visible total price field and the hidden repair_cost field
+         * Parses prices from table cells, handling Danish number format (comma as decimal separator)
+         */
+        function updateTotalPrice() {
+            const tbody = document.getElementById('damageTableBody');
+            let total = 0;
+            
+            // Iterate through all table rows and sum up the prices
+            for (let i = 0; i < tbody.rows.length; i++) {
+                // Get price from third column (index 2)
+                const priceCell = tbody.rows[i].cells[2].textContent;
+                // Remove all non-digit characters except comma, then replace comma with dot for parsing
+                const price = parseFloat(priceCell.replace(/[^\d,]/g, '').replace(',', '.'));
+                
+                // Add to total if valid number
+                if (!isNaN(price)) {
+                    total += price;
+                }
+            }
+            
+            // Format total with Danish locale and update visible field
+            const formattedTotal = total.toLocaleString('da-DK') + ',-';
+            document.getElementById('total_price').value = formattedTotal;
+            
+            // Update hidden repair_cost field with unformatted value (for backend processing)
+            // Uses toFixed(2) to ensure two decimal places
+            document.getElementById('repair_cost').value = total.toFixed(2);
+        }
+
+        /**
+         * Event listener for form submission
+         * Ensures total price is calculated and repair_cost is updated before form is submitted
+         */
+        document.getElementById('damage-form').addEventListener('submit', function(e) {
+            updateTotalPrice();
+        });
+
+        // Calculate initial total price when page loads (for sample data)
+        updateTotalPrice();
+    </script>
 
 </body>
 </html>
