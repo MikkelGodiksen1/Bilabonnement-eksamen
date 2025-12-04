@@ -20,7 +20,7 @@ public class    VehicleService {
     }
 
     // Get vehicle by ID
-    public Optional<Vehicle> getVehicleById(int id) {
+    public Optional<Vehicle> getVehicleById(String id) {
         return vehicleRepository.findById(id);
     }
 
@@ -55,7 +55,7 @@ public class    VehicleService {
     }
 
     // Delete vehicle
-    public void deleteVehicle(int id) {
+    public void deleteVehicle(String id) {
         vehicleRepository.deleteById(id);
     }
 

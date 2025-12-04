@@ -1,7 +1,11 @@
 package com.example.demo.repository;
 
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
 
-import com.example.demo.DTO.LeaseRequest;
+/*
 import com.example.demo.model.CustomerModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +23,7 @@ public class CustomerJDBCRepository {
 
 
         try (Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/test_bilabonnement", "root", "keamanden");
+                "jdbc:mysql://localhost:3306/test_bilabonnement", "root", "");
              PreparedStatement ps = conn.prepareStatement(sqlCustomer, Statement.RETURN_GENERATED_KEYS)) {
 
 
@@ -54,3 +58,4 @@ public class CustomerJDBCRepository {
 
 
 }
+*/

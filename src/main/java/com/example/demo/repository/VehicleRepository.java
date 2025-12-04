@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
+public interface VehicleRepository extends JpaRepository<Vehicle, String> {
 
     // Find vehicle by registration number
     Optional<Vehicle> findByRegistrationNo(String registrationNo);

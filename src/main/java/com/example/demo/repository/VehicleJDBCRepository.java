@@ -10,10 +10,10 @@ public class VehicleJDBCRepository {
 
 
     public Long findVehicleIdByRegistration(String registrationNo) {
-        String sql = "SELECT vei_id FROM vehicle WHERE registration_no = ?";
+        String sql = "SELECT vin_id FROM vehicle WHERE registration_no = ?";
 
         try (Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/test_bilabonnement", "root", "keamanden"
+                "jdbc:mysql://localhost:3306/test_bilabonnement", "root", ""
         );
              PreparedStatement ps = conn.prepareStatement(sql)) {
 

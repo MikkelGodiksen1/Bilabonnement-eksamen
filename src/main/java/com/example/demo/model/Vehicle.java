@@ -2,14 +2,19 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+
 @Entity
-@Table(name = "Vehicle")
+@Table(name = "vehicle")
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vei_id")
-    private int veiId;
+    @Column(name = "vin_id")
+    private String vinId;
 
     @Column(name = "registration_no", unique = true, nullable = false, length = 10)
     private String registrationNo;
@@ -27,7 +32,8 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(String registrationNo, String brand, String model, int modelYear) {
+    public Vehicle(String vinId, String registrationNo, String brand, String model, int modelYear) {
+        this.vinId = vinId;
         this.registrationNo = registrationNo;
         this.brand = brand;
         this.model = model;
@@ -35,12 +41,12 @@ public class Vehicle {
     }
 
     // Getters and Setters
-    public int getVeiId() {
-        return veiId;
+    public String getVinId() {
+        return vinId;
     }
 
-    public void setVeiId(int veiId) {
-        this.veiId = veiId;
+    public void setVinId(String vinId) {
+        this.vinId = vinId;
     }
 
     public String getRegistrationNo() {
@@ -78,7 +84,7 @@ public class Vehicle {
     @Override
     public String toString() {
         return "Vehicle{" +
-                "veiId=" + veiId +
+                "vinId=" + vinId +
                 ", registrationNo='" + registrationNo + '\'' +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +

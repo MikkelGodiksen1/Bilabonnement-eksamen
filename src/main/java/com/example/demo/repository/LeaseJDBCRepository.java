@@ -1,7 +1,10 @@
 package com.example.demo.repository;
 
-
-import com.example.demo.DTO.LeaseRequest;
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+/*
 import com.example.demo.model.CustomerModel;
 import com.example.demo.model.LeaseModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,7 @@ public class LeaseJDBCRepository {
         String sqlLease = "INSERT INTO lease_model (end_date, km_start, start_date, total_price, customer_id, vei_id) VALUES (?,?,?,?,?,?)";
 
         try (Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/test_bilabonnement", "root", "keamanden");
+                "jdbc:mysql://localhost:3306/test_bilabonnement", "root", "");
              PreparedStatement ps = conn.prepareStatement(sqlLease)) {
 
 
@@ -44,7 +47,7 @@ public class LeaseJDBCRepository {
     public double getTotalLeasePrice() {
         String sql = "SELECT COALESCE(SUM(total_price), 0) FROM lease_model";
         try (Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/test_bilabonnement", "root", "keamanden");
+                "jdbc:mysql://localhost:3306/test_bilabonnement", "root", "");
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
@@ -62,3 +65,4 @@ public class LeaseJDBCRepository {
 
 
 }
+*/
