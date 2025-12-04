@@ -11,3 +11,6 @@ public class DemoApplication {
 	}
 
 }
+
+// !!!
+// Check the notes left at the bottom of application.properties

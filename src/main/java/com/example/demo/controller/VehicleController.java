@@ -33,7 +33,7 @@ public class VehicleController {
 
     // Show vehicle details
     @GetMapping("/{id}")
-    public String viewVehicle(@PathVariable int id, Model model) {
+    public String viewVehicle(@PathVariable String id, Model model) {
         Optional<Vehicle> vehicle = vehicleService.getVehicleById(id);
         if (vehicle.isPresent()) {
             model.addAttribute("vehicle", vehicle.get());

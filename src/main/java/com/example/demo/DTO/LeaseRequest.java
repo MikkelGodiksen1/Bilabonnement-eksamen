@@ -1,9 +1,13 @@
 package com.example.demo.DTO;
-
+/*
 import com.example.demo.model.CustomerModel;
 import com.example.demo.model.LeaseModel;
 import com.example.demo.model.Vehicle;
 
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
 
 public class LeaseRequest {
 
@@ -36,3 +40,4 @@ public class LeaseRequest {
     }
 
 }
+*/

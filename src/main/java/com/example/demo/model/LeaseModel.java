@@ -2,33 +2,46 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+
 @Entity
+ @Table(name = "leasecontract")
 public class LeaseModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "lease_id")
+    private long leaseId;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private CustomerModel customer;
 
     @ManyToOne
-    @JoinColumn(name = "vei_id")
+    @JoinColumn(name = "vin_id")
     private Vehicle vehicle;
-
+    @Column(name = "start_date")
     private LocalDate startDate;
+    @Column(name = "end_date")
     private LocalDate endDate;
+    @Column(name = "total_price")
     private double totalPrice;
+    @Column(name = "km_start")
     private int kmStart;
 
+    @Transient
+    private Long customerId;
+
+    @Transient
+    private String vinId;
 
 
     public LeaseModel() {
-
     }
 
 
@@ -49,8 +62,8 @@ public class LeaseModel {
         this.customer = customer;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setLeaseId(long id) {
+        this.leaseId = id;
     }
 
     public void setStartDate(LocalDate startDate) {
@@ -69,8 +82,8 @@ public class LeaseModel {
         this.kmStart = kmStart;
     }
 
-    public long getId() {
-        return id;
+    public long getLeaseId() {
+        return leaseId;
     }
 
     public LocalDate getStartDate() {
@@ -88,5 +101,11 @@ public class LeaseModel {
     public int getKmStart() {
         return kmStart;
     }
+
+    public Long getCustomerId() { return customerId; }
+    public void setCustomerId(Long customerId) { this.customerId = customerId; }
+
+    public String getVinId() { return vinId; }
+    public void setVinId(String vinId) { this.vinId = vinId; }
 
 }

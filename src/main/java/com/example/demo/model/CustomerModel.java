@@ -1,30 +1,47 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
-@Entity
-public class CustomerModel {
 
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+// TODO NEEDS CLEANUP
+
+@Entity
+@Table(name = "customer")
+public class CustomerModel {
 
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+    @Column(name = "customer_id")
+    private Long customerId;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "email")
     private String email;
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "date_of_birth")
     private LocalDate dOB;
+    @Column(name = "driver_license_no")
     private String driverLicenseNumber;
+    @Column(name = "street")
     private String street;
+    @Column(name = "house_no")
     private String houseNumber;
+    @Column(name = "postal_code")
     private String postalCode;
+    @Column(name = "city")
     private String city;
+    @Column(name = "country")
     private String country;
 
 
@@ -118,11 +135,11 @@ public class CustomerModel {
     }
 
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCustomerId(Long id) {
+        this.customerId = id;
     }
 
-    public Long getId() {
-        return id;
+    public Long getCustomerId() {
+        return customerId;
     }
 }
