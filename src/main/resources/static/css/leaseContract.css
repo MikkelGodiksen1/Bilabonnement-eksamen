@@ -1,3 +1,149 @@
-/*
-to be continued....
- */
+/* This line "downloads" the font: Montserrat, sans-serif so it can be used in the design */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+/* CSS variables. Global place to edit colors */
+:root {
+    --bg-color: rgb(247, 247, 247);
+    --text-color: #000000;
+    --card-bg: #ffffff;
+    --border-color: #000000;
+    --primary-btn: rgb(24, 146, 195);
+}
+
+/* Border-box sizing for all elements */
+* {
+    box-sizing: border-box;
+}
+
+/* Global styling for the body */
+body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Content box centered on page */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 24px 32px 32px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    margin: 0 0 24px;
+    font-weight: 600;
+}
+
+/* Styling for top GET form (dropdown selections) */
+form[method="get"] {
+    max-width: 1000px;
+    margin: 0 auto 20px;
+}
+
+/* Align dropdowns horizontally */
+form[method="get"] > div {
+    display: flex;
+    gap: 20px;
+}
+
+/* Three-column layout for customer, address, and vehicle info */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Spacing between label/input groups */
+.form-group {
+    margin-bottom: 10px;
+}
+
+/* Ensures labels sit above inputs */
+label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+/* Styling for all form inputs and dropdowns */
+input,
+select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: var(--text-color);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+/* Show pointer cursor when hovering dropdown */
+select {
+    cursor: pointer;
+}
+
+/* Blue glow when input or dropdown is active/focused */
+input:focus,
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(24, 146, 195, 0.2);
+}
+
+/* Background color to show readonly fields */
+.readonly {
+    background-color: #f9f9f9;
+}
+
+/* Center the submit button area and add spacing */
+.actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* General button design */
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--primary-btn);
+    background: var(--primary-btn);
+    color: #ffffff;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    /* Smooth transition when hovering */
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+/* Button variation. Ensures correct color if overridden */
+.btn-primary {
+    background-color: var(--primary-btn);
+}
+
+/* Larger version of button */
+.btn-big {
+    padding: 10px 30px;
+    font-size: 15px;
+}
+
+/* Hover effect for button */
+.btn:hover:enabled {
+    background-color: rgb(18, 120, 160);
+    transform: translateY(-1px);
+}
+
+/* Disabled button styling */
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

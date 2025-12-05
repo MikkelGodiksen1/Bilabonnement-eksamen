@@ -24,7 +24,7 @@ public class LeaseService {
     //private final VehicleJDBCRepository vehicleJDBCRepository;
     //private final LeaseJDBCRepository leaseJDBCRepository;
 
-    public LeaseService(CustomerRepository customerRepository, LeaseRepository leaseRepository, VehicleService vehicleService,  VehicleJDBCRepository vehicleJDBCRepository) {
+    public LeaseService(CustomerRepository customerRepository, LeaseRepository leaseRepository, VehicleService vehicleService) {
         this.customerRepository = customerRepository;
         this.leaseRepository = leaseRepository;
         this.vehicleService = vehicleService;

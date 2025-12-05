@@ -1,0 +1,28 @@
+<!-- Simple html page that shows succesfull creation of the leaseContract then sends you back to leaseContract page-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lejekontrakt oprettet</title>
+
+    <link rel="stylesheet" th:href="@{/css/leaseContract.css}">
+    <link rel="stylesheet" th:href="@{/css/header_style.css}">
+</head>
+<body>
+
+<div th:replace="Globals/header.html :: header"></div>
+
+<div class="container" style="max-width: 600px; text-align: center;">
+    <h2>Lejekontrakt oprettet succesfuldt!</h2>
+    <p>Lejekontrakten er nu gemt i systemet.</p>
+    <p>Tryk på "ok" for at komme videre...</p>
+
+    <div class="actions" style="margin-top: 20px;">
+        <!-- “OK” button sends you back to leaseContract.html page -->
+        <a th:href="@{/leaseContract}" class="btn btn-primary btn-big">OK</a>
+    </div>
+</div>
+
+</body>
+</html>

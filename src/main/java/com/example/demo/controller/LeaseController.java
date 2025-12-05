@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 import org.springframework.ui.Model;
-
-
 import com.example.demo.model.CustomerModel;
 import com.example.demo.model.LeaseModel;
 import com.example.demo.model.Vehicle;
@@ -12,11 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-// TODO NEEDS CLEANUP
-// TODO NEEDS CLEANUP
-// TODO NEEDS CLEANUP
-// TODO NEEDS CLEANUP
 
+// Controller class handles web requests and returns view names rendered by thymeleaf
 @Controller
 public class LeaseController {
 
@@ -24,6 +19,7 @@ public class LeaseController {
     private final CustomerRepository customerRepository;
     private final VehicleRepository vehicleRepository;
 
+    // Constructor for database access for customers and vehicles also logic for saving leases etc
     public LeaseController(LeaseService leaseService,
                            CustomerRepository customerRepository,
                            VehicleRepository vehicleRepository) {
@@ -32,19 +28,24 @@ public class LeaseController {
         this.vehicleRepository = vehicleRepository;
     }
 
+    // method that shows the createContract page and handlet GET reguests
     @GetMapping("/leaseContract")
     public String showCreateLeaseForm(
+            // query paramters to pass data to thymeleaf template
             @RequestParam(value = "customerId", required = false) Long customerId,
             @RequestParam(value = "vinId", required = false) String vinId,
             Model model) {
 
+        // Loads all customers and vehicle sorted for dropdown menu
         var customers = customerRepository.findAll(Sort.by("firstName"));
         var vehicles  = vehicleRepository.findAll(Sort.by("registrationNo"));
 
+        // This makes the leaseform data as a object for the thymeleaf form
         LeaseModel leaseForm = new LeaseModel();
         if (customerId != null) leaseForm.setCustomerId(customerId);
         if (vinId != null) leaseForm.setVinId(vinId);
 
+        // This finds the customer and vehicle data in the database
         CustomerModel selectedCustomer = (customerId != null)
                 ? customerRepository.findById(customerId).orElse(null)
                 : null;
@@ -53,6 +54,7 @@ public class LeaseController {
                 ? vehicleRepository.findById(vinId).orElse(null)
                 : null;
 
+        // This puts all data to the model and returns the view input data for thymeleaf
         model.addAttribute("customers", customers);
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("leaseForm", leaseForm);
@@ -62,29 +64,31 @@ public class LeaseController {
         return "pages/leaseContract";
     }
 
+    // Method that handles "opret lejekontrakt" submit
     @PostMapping("/leaseContract")
     public String createLease(@ModelAttribute("leaseForm") LeaseModel leaseForm) {
 
-        // find the real customer and vehicle using the IDs from the form
+        // Find the full customer and vehicle entity using the IDs from the form
         CustomerModel customer = customerRepository.findById(leaseForm.getCustomerId())
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
 
         Vehicle vehicle = vehicleRepository.findById(leaseForm.getVinId())
                 .orElseThrow(() -> new IllegalArgumentException("Vehicle not found"));
 
-        // attach them to the lease entity
+        // Attaches customer and vehicle data to the lease entity
         leaseForm.setCustomer(customer);
         leaseForm.setVehicle(vehicle);
 
-        // now save the lease
+        // Saves the lease data to the database
         leaseService.save(leaseForm);
 
-        // redirect back to the form (or to a list page if you want)
-        return "redirect:/leaseContract";
+        // Redirects back to the same page
+        return "pages/leaseContractSuccess";
     }
 
 
 
+    // Used to show current leases
     @GetMapping("/current")
     public String showCurrentLeases(Model model) {
         var currentLeases = leaseService.getCurrentLeases();

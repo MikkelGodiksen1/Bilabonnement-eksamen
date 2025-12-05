@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
-
+/*
 @Repository
 public class VehicleJDBCRepository {
 
@@ -31,3 +31,5 @@ public class VehicleJDBCRepository {
     }
 
 }
+
+ */

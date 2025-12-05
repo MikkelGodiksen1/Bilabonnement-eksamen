@@ -1,97 +1,40 @@
-<!-- TODO ADD COMMENTS ETC -->
-<!-- TODO ADD COMMENTS ETC -->
-<!-- TODO ADD COMMENTS ETC -->
-<!-- TODO ADD COMMENTS ETC -->
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Opret lejekontrakt</title>
+
+    <!-- links the css file for the header -->
+    <link rel="stylesheet" th:href="@{/css/header_style.css}">
+    <!-- links the css file for the html page -->
+    <link rel="stylesheet" th:href="@{/css/leaseContract.css}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
-
-        .container {
-            padding: 30px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 10px;
-        }
-
-        label {
-            display: block;
-            font-size: 13px;
-            margin-bottom: 2px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 4px 6px;
-            box-sizing: border-box;
-        }
-
-        .actions {
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border: 1px solid #555;
-            background: #f5f5f5;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: #e0e0e0;
-            font-weight: bold;
-        }
-
-        .btn-big {
-            padding: 10px 30px;
-            font-size: 15px;
-            box-shadow: 4px 4px 0 #aaa;
-        }
-
-        .readonly {
-            background-color: #f7f7f7;
-        }
     </style>
 </head>
 <body>
 
+<!-- Our global header fragment -->
+<div th:replace="Globals/header.html :: header"></div>
+
+
 <div class="container">
+
     <h2>Opret lejekontrakt</h2>
 
-    <!-- FORM 1: This part gets data for customer and vehicle and reloads the page to add them -->
-
+    <!-- FORM 1: This part gets data for customer and vehicle and reloads the page to add them to the form -->
     <form th:action="@{/leaseContract}" method="get" style="max-width: 1000px; margin: 0 auto 20px;">
         <div style="display: flex; gap: 20px;">
             <div style="flex: 1;">
+
+                <!-- Dropdown menu for customer -->
                 <label for="customerSelect">Vælg kunde</label>
                 <select id="customerSelect" name="customerId">
+                    <!-- Placeholder if no customer selected -->
                     <option value=""
                             th:text="'-- vælg kunde --'"
                             th:selected="${leaseForm.customerId == null}"></option>
 
+                    <!-- Dropdown options sorted by controller by first name and only shows first and last name -->
                     <option th:each="c : ${customers}"
                             th:value="${c.customerId}"
                             th:text="${c.firstName + ' ' + c.lastName}"
@@ -101,12 +44,15 @@
             </div>
 
             <div style="flex: 1;">
+                <!-- dropdown menu for vehicle -->
                 <label for="vehicleSelect">Vælg køretøj (reg. nr.)</label>
                 <select id="vehicleSelect" name="vinId">
+                    <!-- Placeholder if no vehicle selected -->
                     <option value=""
                             th:text="'-- vælg køretøj --'"
                             th:selected="${leaseForm.vinId == null}"></option>
 
+                    <!-- Dropdown options sorted by controller by registration number and shows registration number, brand and model -->
                     <option th:each="v : ${vehicles}"
                             th:value="${v.vinId}"
                             th:text="${v.registrationNo + ' - ' + v.brand + ' ' + v.model}"
@@ -115,6 +61,7 @@
                 </select>
             </div>
 
+            <!-- "Hent data" button-->
             <div style="align-self: flex-end;">
                 <button type="submit" class="btn btn-primary">Hent data</button>
             </div>
@@ -124,13 +71,15 @@
     <!-- FORM 2: post/create a lease -->
     <form th:action="@{/leaseContract}" th:object="${leaseForm}" method="post">
 
-        <!-- hidden fields to post ids -->
+        <!-- Hidden fields to post ids -->
         <input type="hidden" th:field="*{customerId}">
         <input type="hidden" th:field="*{vinId}">
 
         <div class="form-grid">
 
-            <!-- customer info left column -->
+            <!-- Left column has customer info -->
+            <!-- Readonly to prevent manually inputting data -->
+            <!-- Thymeleaf fills these fields using the selectedCustomer object that the controller adds to the model if not null -->
             <div>
                 <div class="form-group">
                     <label>Fornavn</label>
@@ -169,7 +118,9 @@
                 </div>
             </div>
 
-            <!-- middle column adress data -->
+            <!-- Middle column has address data -->
+            <!-- Readonly to prevent manually inputting data -->
+            <!-- Thymeleaf fills these fields using the selectedCustomer object that the controller adds to the model if not null -->
             <div>
                 <div class="form-group">
                     <label>Vejnavn</label>
@@ -202,7 +153,9 @@
                 </div>
             </div>
 
-            <!-- right column has vehicle and lease data -->
+            <!-- Right column has vehicle and lease data -->
+            <!-- Readonly to prevent manually inputting data -->
+            <!-- Thymeleaf fills these fields using the selectedVehicle object that the controller adds to the model if not null -->
             <div>
                 <div class="form-group">
                     <label>Køretøj reg. nr.</label>
@@ -218,6 +171,9 @@
                                       : ''}">
                 </div>
 
+                <!-- Editable lease fields for manual input bound to leaseForm using th:field-->
+                <!-- when posted values goes into leaseForm.startDate in the controller etc for later use -->
+                <!-- When the form is posted MVC fills a LeaseModel leasform parameter in the controller ex startDate -->
                 <div class="form-group">
                     <label for="startDate">Startdato for udlejning</label>
                     <input id="startDate" type="date" th:field="*{startDate}" required>
@@ -242,6 +198,8 @@
 
         </div>
 
+        <!-- Makes the "opret lejekontrakt" button disabled if either leaseForm.customerId or leaseForm.vinId is null -->
+        <!-- So disabled button if no customer or vehicle has been selected in the dropdown menu -->
         <div class="actions">
             <button type="submit" class="btn btn-primary btn-big"
                     th:disabled="${leaseForm.customerId == null or leaseForm.vinId == null}">
