@@ -4,24 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d823522d-51cc-4e50-b2a6-5b14f920f18c" name="Changes" comment="workspace.xml fix">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/DTO/LeaseRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/DTO/LeaseRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/CurrentLeaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/CurrentLeaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/LeaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/LeaseContractController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/model/CustomerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/model/CustomerModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/model/LeaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/model/LeaseContractModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/model/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/model/Vehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/CustomerJDBCRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/CustomerJDBCRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/LeaseJDBCRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/LeaseJDBCRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/LeaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/LeaseContractRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/VehicleJDBCRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/VehicleJDBCRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/VehicleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/VehicleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/LeaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/LeaseContractService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/pages/leaseContract.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/pages/leaseContract.html" afterDir="false" />
+    <list default="true" id="d823522d-51cc-4e50-b2a6-5b14f920f18c" name="Changes" comment="small fixes/refactor etc">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/pages/lease.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/pages/lease.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +78,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1764938706413</updated>
-      <workItem from="1764938709458" duration="5998000" />
+      <workItem from="1764938709458" duration="6393000" />
     </task>
     <task id="LOCAL-00001" summary="workspace.xml fix">
       <option name="closed" value="true" />
@@ -104,7 +88,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764938800222</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="small fixes/refactor etc">
+      <option name="closed" value="true" />
+      <created>1764944978653</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1764944978653</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,6 +104,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="workspace.xml fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace.xml fix" />
+    <MESSAGE value="small fixes/refactor etc" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fixes/refactor etc" />
   </component>
 </project>
