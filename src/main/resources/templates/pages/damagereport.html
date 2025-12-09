@@ -63,7 +63,7 @@
                     <!-- End mileage: Final kilometers when damage was reported -->
                     <input type="hidden" th:field="*{kmSlut}" id="kmSlut" value="0">
                     <!-- Repair cost: Automatically calculated from damage list, updated via JavaScript -->
-                    <input type="hidden" th:field="*{repairCost}" id="repair_cost">
+                    <input type="hidden" th:field="*{repairCost}" id="repair_cost" value="0.00">
                 </form>
             </div>
 
@@ -107,22 +107,7 @@
                             Contains sample data that will be replaced/added to by user interaction
                         -->
                         <tbody id="damageTableBody">
-                            <!-- Sample damage entries - will be dynamically managed via JavaScript -->
-                            <tr>
-                                <td>1</td>
-                                <td>Ridse venstre dør</td>
-                                <td>2300,-</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Skade på ret</td>
-                                <td>1200,-</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>ridse i kofanger</td>
-                                <td>700,-</td>
-                            </tr>
+                            <!-- Rows are added dynamically; starts empty -->
                         </tbody>
                     </table>
                 </div>
@@ -131,7 +116,7 @@
                 <div class="total-section">
                     <label for="total_price">Samlet pris for udbedring</label>
                     <!-- Read-only input showing formatted total price, updated automatically -->
-                    <input type="text" id="total_price" readonly value="4200,-">
+                    <input type="text" id="total_price" readonly value="0,-">
                 </div>
 
                 <!-- Submit button for the form - positioned outside form but linked via form attribute -->
