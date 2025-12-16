@@ -43,5 +43,5 @@ VALUES ('AB12345', 'VIN0001', 'Toyota', 'Yaris', 2020),
 
 -- Seed data for leasecontract so the damage report page's default lease_id=1 exists.
 -- NOTE: Table/column names must match Schema.sql (registration_no, not vin).
-INSERT INTO x   LeaseContract (start_date, end_date, total_price, customer_id, registration_no, km_start)
+INSERT INTO LeaseContract (start_date, end_date, total_price, customer_id, registration_no, km_start)
 VALUES (CURDATE(), DATE_ADD(CURDATE(), INTERVAL 30 DAY), 555.00, 1, 'CD23456', 5);
