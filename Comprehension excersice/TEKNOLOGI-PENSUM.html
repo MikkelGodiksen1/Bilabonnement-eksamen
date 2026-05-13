@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<title>Teknologi 2 - Pensum</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "SF Pro Display", "Helvetica Neue", sans-serif;
+    background: linear-gradient(180deg, #0a0e1f 0%, #050810 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    line-height: 1.6;
+    display: flex;
+  }
+  .sidebar {
+    width: 320px;
+    height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    padding: 30px 20px;
+    background: rgba(255,255,255,0.03);
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .sidebar h2 {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #f472b6;
+    margin-bottom: 16px;
+    margin-top: 24px;
+  }
+  .sidebar h2:first-of-type { margin-top: 0; }
+  .sidebar a {
+    display: block;
+    padding: 6px 12px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.15s;
+  }
+  .sidebar a:hover {
+    background: rgba(244,114,182,0.1);
+    color: #fff;
+    transform: translateX(4px);
+  }
+  .sidebar .home {
+    color: #34d399;
+    font-weight: 700;
+    margin-bottom: 24px;
+    border: 1px solid rgba(52,211,153,0.3);
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .main {
+    flex: 1;
+    padding: 60px 60px 100px 60px;
+    max-width: 1100px;
+  }
+  h1 {
+    font-size: 48px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #f472b6, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  .lead {
+    color: #94a3b8;
+    font-size: 17px;
+    margin-bottom: 40px;
+    max-width: 760px;
+  }
+  .exam-info {
+    background: rgba(244,114,182,0.06);
+    border: 1px solid rgba(244,114,182,0.2);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 50px;
+    max-width: 760px;
+  }
+  .exam-info strong { color: #fff; }
+  .exam-info ul { margin: 8px 0 0 22px; }
+  section { margin-bottom: 60px; scroll-margin-top: 30px; }
+  section.category {
+    padding: 40px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  h2.cat-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--c, #f472b6);
+    display: inline-block;
+  }
+  .cat-sub {
+    color: #94a3b8;
+    margin-bottom: 32px;
+    font-size: 15px;
+  }
+  h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--c, #f472b6);
+    margin-top: 32px;
+    margin-bottom: 12px;
+    scroll-margin-top: 30px;
+  }
+  h3:first-of-type { margin-top: 0; }
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--c, #f472b6);
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  p { margin-bottom: 12px; color: #cbd5e1; }
+  strong { color: #fff; }
+  ul, ol { margin: 12px 0 16px 24px; }
+  li { margin-bottom: 6px; color: #cbd5e1; }
+  code {
+    background: rgba(244,114,182,0.12);
+    color: #fbcfe8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+  }
+  pre {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 16px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .talk {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(52,211,153,0.08), rgba(34,211,238,0.08));
+    border-left: 4px solid #34d399;
+    border-radius: 8px;
+    color: #d1fae5;
+    font-style: italic;
+    font-size: 14px;
+  }
+  .talk::before {
+    content: "🎤 Til eksamen: ";
+    font-weight: 700;
+    color: #34d399;
+    font-style: normal;
+  }
+  .demo {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: rgba(167,139,250,0.08);
+    border-left: 4px solid #a78bfa;
+    border-radius: 8px;
+    color: #ddd6fe;
+    font-size: 14px;
+  }
+  .demo::before {
+    content: "🖥️ Demo: ";
+    font-weight: 700;
+    color: #a78bfa;
+    font-style: normal;
+  }
+  .warn {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: rgba(251,146,60,0.08);
+    border-left: 4px solid #fb923c;
+    border-radius: 8px;
+    color: #fed7aa;
+    font-size: 14px;
+  }
+  .warn::before {
+    content: "⚠️ Pas på: ";
+    font-weight: 700;
+    color: #fb923c;
+  }
+  .tip {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: rgba(34,211,238,0.08);
+    border-left: 4px solid #22d3ee;
+    border-radius: 8px;
+    color: #cffafe;
+    font-size: 14px;
+  }
+  .tip::before {
+    content: "💡 Tip: ";
+    font-weight: 700;
+    color: #22d3ee;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: #cbd5e1;
+    font-size: 14px;
+    vertical-align: top;
+  }
+  th {
+    background: rgba(244,114,182,0.18);
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  tr:last-child td { border-bottom: none; }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    background: rgba(244,114,182,0.2);
+    color: #fbcfe8;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 8px;
+  }
+
+  /* Category colors */
+  .cat-cicd       { --c: #60a5fa; }
+  .cat-docker     { --c: #22d3ee; }
+  .cat-tcpip      { --c: #34d399; }
+  .cat-dnshttp    { --c: #fbbf24; }
+  .cat-linux      { --c: #a78bfa; }
+  .cat-cloud      { --c: #f472b6; }
+  .cat-krypt      { --c: #ef4444; }
+
+  /* SEARCH BAR */
+  .search-wrapper {
+    position: sticky;
+    top: 0;
+    background: rgba(10, 14, 31, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 12px 0 16px 0;
+    margin-bottom: 8px;
+    z-index: 10;
+  }
+  .search-box {
+    width: 100%;
+    padding: 10px 14px 10px 38px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 12px center;
+  }
+  .search-box:focus {
+    border-color: #f472b6;
+    background-color: rgba(244,114,182,0.08);
+    box-shadow: 0 0 0 3px rgba(244,114,182,0.15);
+  }
+  .search-box::placeholder { color: #64748b; }
+  .search-info {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 6px;
+    text-align: center;
+  }
+  .search-info kbd {
+    background: rgba(255,255,255,0.1);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  mark {
+    background: rgba(244,114,182,0.4);
+    color: #f472b6;
+    padding: 0 2px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .search-hidden { display: none !important; }
+  .sidebar a.search-hidden { display: none !important; }
+  .no-results {
+    padding: 40px;
+    text-align: center;
+    color: #94a3b8;
+    font-style: italic;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    margin: 20px 0;
+    display: none;
+  }
+  .no-results.show { display: block; }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a href="INDEX.html" class="home">← Tilbage til INDEX</a>
+
+  <div class="search-wrapper">
+    <input type="text" id="searchBox" class="search-box" placeholder="Søg i teknologi-pensum..." autocomplete="off">
+    <div class="search-info">
+      Tryk <kbd>/</kbd> for at fokusere · <kbd>Esc</kbd> for at rydde
+    </div>
+  </div>
+
+  <h2>⚙️ 1. CI/CD</h2>
+  <a href="#cicd-intro">Hvad er CI/CD?</a>
+  <a href="#gha-anatomy">GitHub Actions opbygning</a>
+  <a href="#gha-uses-run">uses vs run</a>
+  <a href="#gha-cache">Caching</a>
+  <a href="#gha-pinning">Hash-pinning</a>
+  <a href="#maven-lifecycle">Maven lifecycle i CI</a>
+  <a href="#workflow-dispatch">workflow_dispatch</a>
+  <a href="#docker-push">Build &amp; push Docker images</a>
+
+  <h2>🐳 2. Docker</h2>
+  <a href="#docker-basics">Dockerfile, image, container</a>
+  <a href="#docker-cache">Build cache</a>
+  <a href="#docker-from">FROM &amp; base images</a>
+  <a href="#multi-stage">Multi-stage builds</a>
+  <a href="#docker-volumes">Volumes &amp; mounts</a>
+  <a href="#compose">Docker Compose</a>
+  <a href="#port-mapping">Port mapping</a>
+  <a href="#docker-commands">Kommandoer (run/exec/ps)</a>
+
+  <h2>🌐 3. TCP/IP</h2>
+  <a href="#osi-layers">OSI &amp; TCP/IP-lag</a>
+  <a href="#ip-mac">IP- og MAC-adresse</a>
+  <a href="#router-switch">Router vs Switch</a>
+  <a href="#public-private">Public vs lokal IP</a>
+  <a href="#ports">Porte</a>
+  <a href="#tcp-vs-udp">TCP vs UDP</a>
+  <a href="#tcp-handshake">SYN/ACK/FIN handshake</a>
+  <a href="#wireshark">WireShark filtre</a>
+
+  <h2>📡 4. HTTP &amp; DNS</h2>
+  <a href="#dns-intro">DNS-grundprincipper</a>
+  <a href="#dns-records">Record-typer</a>
+  <a href="#dns-ttl">TTL</a>
+  <a href="#authoritative-resolver">Autoritativ vs resolver</a>
+  <a href="#http-methods">HTTP-metoder</a>
+  <a href="#http-status">Statuskoder</a>
+  <a href="#http-headers">Accept vs Content-Type</a>
+  <a href="#http-stateless">Stateless &amp; sessions</a>
+
+  <h2>🐧 5. Linux-terminalen</h2>
+  <a href="#terminal-shell">Terminal vs shell vs kommando</a>
+  <a href="#linux-navigation">Navigation</a>
+  <a href="#linux-files">Filhåndtering</a>
+  <a href="#linux-search">Søgning &amp; pipes</a>
+  <a href="#linux-perms">Filrettigheder &amp; chmod</a>
+  <a href="#ssh">SSH &amp; public key</a>
+  <a href="#scp">SCP — filoverførsel</a>
+
+  <h2>☁️ 6. Cloud</h2>
+  <a href="#iaas-paas">IaaS vs PaaS</a>
+  <a href="#cloud-products">Cloud-produkter</a>
+  <a href="#deploy-spring">Deploy Spring Boot</a>
+  <a href="#cd-pipeline">CD-pipeline</a>
+  <a href="#firewall">Firewall-regler</a>
+
+  <h2>🔐 7. Kryptering &amp; sikkerhed</h2>
+  <a href="#sym-asym">Symmetrisk vs asymmetrisk</a>
+  <a href="#hashing">Hash-funktioner</a>
+  <a href="#signatures">Digitale signaturer</a>
+  <a href="#gpg">GPG</a>
+  <a href="#tls">TLS handshake</a>
+  <a href="#cert-chain">Certifikatkæde &amp; CA</a>
+  <a href="#ssh-keys">SSH public key auth</a>
+  <a href="#ssh-tunnel">SSH tunnel</a>
+  <a href="#vpn">VPN &amp; WireGuard</a>
+
+  <h2>📅 Uger</h2>
+  <a href="#week-overview">Ugeoversigt</a>
+</aside>
+
+<main class="main">
+
+<h1>Teknologi 2 — Pensum</h1>
+<p class="lead">
+  Komplet opslagsværk for Teknologi 2 (Containerization &amp; DevOps): CI/CD, Docker, TCP/IP,
+  HTTP/DNS, Linux, Cloud og kryptering. Bygget ovenpå <a href="../teknologi/README.md" style="color:#f472b6">TEK2-Student</a>-pensum
+  og eksamensspørgsmålene fra <code>exam_questions.md</code>.
+</p>
+
+<div class="exam-info">
+  <strong>📋 Eksamensformat:</strong> 7 emner trækkes. Til hvert emne forberedes en disposition med svar
+  på spørgsmål og demonstrationer på computeren. <strong>Eksaminator må gerne spørge ind til andre,
+  relaterede emner</strong> end det man trækker (fx Docker selv om man trak Cloud).
+  <ul>
+    <li><strong>F25B:</strong> 11. og 12. juni</li>
+    <li><strong>F25C:</strong> 2. og 3. juni</li>
+  </ul>
+</div>
+
+<div class="no-results" id="noResults">Ingen resultater fundet. Prøv et andet søgeord.</div>
+
+<!-- ========================= 1. CI/CD ========================= -->
+<section class="category cat-cicd" id="cicd">
+  <h2 class="cat-title">1. CI/CD &amp; GitHub Actions</h2>
+  <p class="cat-sub">Automatisering af build, test og deploy. Køres ved push, PR eller manuelt.</p>
+
+  <h3 id="cicd-intro">Hvad er CI/CD?</h3>
+  <p><strong>CI (Continuous Integration):</strong> Automatisk byg + test ved hvert commit/push. Fanger fejl tidligt.</p>
+  <p><strong>CD (Continuous Delivery/Deployment):</strong> Automatisk levering af artefakter — eller direkte deploy til prod.</p>
+  <h4>Typiske tjek i en CI-pipeline</h4>
+  <ul>
+    <li><strong>Build</strong> — kompilerer koden (<code>mvn compile</code>)</li>
+    <li><strong>Test</strong> — kører enheds- og integrationstests (<code>mvn test</code>)</li>
+    <li><strong>Lint / static analysis</strong> — checkstyle, SpotBugs, ESLint</li>
+    <li><strong>Package</strong> — bygger jar/Docker image (<code>mvn package</code>)</li>
+    <li><strong>Security scan</strong> — fx Dependabot, Trivy</li>
+  </ul>
+
+  <h3 id="gha-anatomy">GitHub Actions — opbygning</h3>
+  <pre><code>name: CI
+on: [push, pull_request]
+
+jobs:
+  build:                        # ét job
+    runs-on: ubuntu-latest
+    steps:                      # liste af trin
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - run: mvn -B verify</code></pre>
+  <table>
+    <tr><th>Nøgleord</th><th>Betydning</th></tr>
+    <tr><td><code>jobs:</code></td><td>Én eller flere parallelle (eller afhængige) jobs. Hvert job får sin egen runner-VM.</td></tr>
+    <tr><td><code>steps:</code></td><td>Sekventielle trin <em>inden i</em> et job. Deler filesystem.</td></tr>
+    <tr><td><code>runs-on:</code></td><td>Hvilken runner: <code>ubuntu-latest</code>, <code>windows-latest</code>, self-hosted...</td></tr>
+    <tr><td><code>on:</code></td><td>Triggers: <code>push</code>, <code>pull_request</code>, <code>schedule</code>, <code>workflow_dispatch</code></td></tr>
+  </table>
+
+  <h3 id="gha-uses-run">uses: vs run:</h3>
+  <table>
+    <tr><th><code>uses:</code></th><th><code>run:</code></th></tr>
+    <tr>
+      <td>Genbruger en <strong>action</strong> (færdigskrevet komponent)</td>
+      <td>Kører <strong>shell-kommandoer</strong> direkte på runneren</td>
+    </tr>
+    <tr>
+      <td><code>uses: actions/checkout@v4</code></td>
+      <td><code>run: mvn test</code></td>
+    </tr>
+  </table>
+  <h4>Eksempler på hvor run: er nyttig</h4>
+  <ul>
+    <li>Køre Maven/Gradle/npm-kommandoer</li>
+    <li>Kopiere filer, sætte env-variable, custom scripts</li>
+    <li>Conditional bash-logik som ikke har en færdig action</li>
+  </ul>
+
+  <h3 id="gha-cache">Caching i GitHub Actions</h3>
+  <p>Caching gemmer mapper (fx <code>~/.m2</code>) mellem runs så man ikke skal hente alle dependencies hver gang.
+  En <strong>cache key</strong> er en streng som identificerer cachen — hvis filen <code>pom.xml</code> ændrer sig,
+  invalideres cachen automatisk.</p>
+  <pre><code>- uses: actions/cache@v4
+  with:
+    path: ~/.m2/repository
+    key:  ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+    restore-keys: |
+      ${{ runner.os }}-maven-</code></pre>
+  <p>Endnu nemmere: <code>actions/setup-java</code> har en indbygget <code>cache: maven</code>-option.</p>
+
+  <h3 id="gha-pinning">Hash-pinning af actions</h3>
+  <p>I stedet for <code>uses: actions/checkout@v4</code> kan man pinne på en specifik commit-SHA:</p>
+  <pre><code>- uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11   # v4.1.1</code></pre>
+  <p><strong>Hvorfor?</strong> Et version-tag (<code>@v4</code>) kan blive flyttet eller kompromitteret af en angriber.
+  En commit-SHA er kryptografisk immutable.</p>
+  <div class="warn">Tags som <code>@v4</code> er let læsbare men <em>kan</em> flyttes. SHA's er sikre men kræver vedligehold (Dependabot kan opdatere dem automatisk).</div>
+
+  <h3 id="maven-lifecycle">Maven build lifecycle i CI</h3>
+  <p>Maven har en fast rækkefølge: <code>validate → compile → test → package → verify → install → deploy</code>.</p>
+  <table>
+    <tr><th>Mål</th><th>Hvornår i CI</th></tr>
+    <tr><td><code>compile</code></td><td>Smoke-test at koden bygger</td></tr>
+    <tr><td><code>test</code></td><td>Unit tests</td></tr>
+    <tr><td><code>verify</code></td><td>Unit + integration tests — typisk det man kører i CI</td></tr>
+    <tr><td><code>package</code></td><td>Producér jar — bruges i deploy-job</td></tr>
+  </table>
+
+  <h3 id="workflow-dispatch">workflow_dispatch — manuel trigger</h3>
+  <pre><code>on:
+  push:
+  workflow_dispatch:            # tilføj denne linje
+    inputs:
+      version:
+        description: 'Release version'
+        required: false</code></pre>
+  <p>Derefter kan man trykke "Run workflow" i GitHub UI'en.</p>
+
+  <h3 id="docker-push">Build &amp; push Docker images</h3>
+  <pre><code>- uses: docker/login-action@v3
+  with:
+    username: ${{ secrets.DOCKERHUB_USERNAME }}
+    password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+- uses: docker/build-push-action@v5
+  with:
+    context: .
+    push: true
+    tags: mikkel/myapp:latest</code></pre>
+
+  <div class="demo">
+    Forklar en GHA-fil til Maven · Tilføj Maven cache · Tilføj <code>workflow_dispatch</code> ·
+    Hash-pin en action · Vis hvordan secrets bruges
+  </div>
+  <div class="talk">
+    "En GitHub Actions workflow er en YAML-fil i <code>.github/workflows/</code>. Den består af triggers (on:),
+    jobs (som kører parallelt på hver sin runner) og steps (sekventielt i samme job). <code>uses:</code> kalder en
+    færdig action, <code>run:</code> eksekverer shell. Caching speeder builds op ved at gemme <code>~/.m2</code> mellem
+    runs — keyen baseres på en hash af pom.xml, så cachen invalideres når dependencies ændrer sig."
+  </div>
+</section>
+
+<!-- ========================= 2. Docker ========================= -->
+<section class="category cat-docker" id="docker">
+  <h2 class="cat-title">2. Docker, Dockerfile &amp; Compose</h2>
+  <p class="cat-sub">Containerization: pakker app + dependencies i ét immutable image.</p>
+
+  <h3 id="docker-basics">Dockerfile vs image vs container</h3>
+  <table>
+    <tr><th>Begreb</th><th>Hvad</th><th>Analogi</th></tr>
+    <tr><td><strong>Dockerfile</strong></td><td>Tekstfil med instruktioner</td><td>Opskrift</td></tr>
+    <tr><td><strong>Image</strong></td><td>Bygget, immutable artefakt</td><td>Frosset måltid</td></tr>
+    <tr><td><strong>Container</strong></td><td>Kørende instans af et image</td><td>Tilberedt og serveret måltid</td></tr>
+  </table>
+
+  <h3 id="docker-cache">Build cache</h3>
+  <p>Docker bygger hvert <code>RUN</code>/<code>COPY</code>/<code>ADD</code>-trin som et <strong>layer</strong>.
+  Hvis input til et trin er uændret, genbruges layeret fra cache.</p>
+  <div class="tip">
+    Læg trin der <em>sjældent</em> ændrer sig øverst (fx <code>COPY pom.xml</code> + <code>mvn dependency:go-offline</code>),
+    og kode-kopiering senere. Så undgår man at re-downloade dependencies hver build.
+  </div>
+  <pre><code>FROM maven:3.9.9-eclipse-temurin-21 AS build
+WORKDIR /app
+COPY pom.xml .                        # cacheres → kun dependencies
+RUN mvn dependency:go-offline
+COPY src ./src                        # ændres ofte → kun denne layer rebuilder
+RUN mvn package -DskipTests</code></pre>
+
+  <h3 id="docker-from">FROM &amp; base images</h3>
+  <p><code>FROM maven:3.9.9-eclipse-temurin-21</code> betyder: byg ovenpå det officielle Maven-image med
+  Java 21 Temurin. Det medbringer allerede Maven, JDK og en Linux-distro.</p>
+  <ul>
+    <li><code>alpine</code> — meget lille (5MB), bruger musl libc</li>
+    <li><code>debian-slim</code> / <code>temurin</code> — mere kompatibel, lidt større</li>
+    <li><code>scratch</code> — helt tom, til Go-binaries</li>
+  </ul>
+
+  <h3 id="multi-stage">Multi-stage builds</h3>
+  <p><strong>Formål:</strong> Bygge med tunge værktøjer (Maven, gcc) men shippe et minimalt runtime-image.</p>
+  <pre><code>FROM maven:3.9.9-eclipse-temurin-21 AS build
+WORKDIR /app
+COPY . .
+RUN mvn package -DskipTests
+
+FROM eclipse-temurin:21-jre           # KUN JRE, ingen Maven
+WORKDIR /app
+COPY --from=build /app/target/app.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]</code></pre>
+  <p>Resultatet er fx 200 MB i stedet for 800 MB.</p>
+
+  <h3 id="docker-volumes">Volumes &amp; bind mounts</h3>
+  <table>
+    <tr><th>Type</th><th>Brug</th></tr>
+    <tr><td><strong>Volume</strong> (<code>-v mydata:/var/lib/mysql</code>)</td><td>Persistent data styret af Docker. Til DB'er.</td></tr>
+    <tr><td><strong>Bind mount</strong> (<code>-v $(pwd):/app</code>)</td><td>Mapper host-folder ind. Til dev — live reload.</td></tr>
+  </table>
+  <h4>COPY (Dockerfile) vs volumes (compose)</h4>
+  <ul>
+    <li><strong>COPY</strong> bager filer ind i image'et — bruges til app-kode der skal shippes</li>
+    <li><strong>volumes</strong> mountes ved runtime — bruges til data der skal overleve container-restart (DB-data, logs)</li>
+  </ul>
+
+  <h3 id="compose">Docker Compose</h3>
+  <p>Definerer en hel <strong>stack</strong> af services i én <code>compose.yaml</code>. Erstatter lange <code>docker run</code>-kommandoer.</p>
+  <pre><code>services:
+  app:
+    build: .                          # bygger fra Dockerfile
+    ports: ["8080:8080"]
+    depends_on: [db]
+    environment:
+      DB_HOST: db
+  db:
+    image: mysql:8                    # færdigt image
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:</code></pre>
+  <p>Kør med <code>docker compose up -d</code>, stop med <code>docker compose down</code>.</p>
+
+  <h4>image: vs dockerfile: / build:</h4>
+  <ul>
+    <li><code>image: mysql:8</code> — pull færdigt image fra registry</li>
+    <li><code>build: .</code> — byg lokalt fra Dockerfile</li>
+  </ul>
+
+  <h3 id="port-mapping">Port mapping</h3>
+  <table>
+    <tr><th>Syntax</th><th>Betydning</th></tr>
+    <tr><td><code>-p 8080:8080</code></td><td>Bind host:8080 → container:8080 på <em>alle</em> interfaces (0.0.0.0)</td></tr>
+    <tr><td><code>-p 127.0.0.1:3307:3306</code></td><td>Bind <em>kun localhost</em> → container:3306 (sikkert til DB)</td></tr>
+    <tr><td><code>-p 3000:3000</code></td><td>Containerens 3000 eksponeres på host'ens 3000</td></tr>
+  </table>
+  <div class="warn">
+    Hvis man binder en database med <code>-p 3306:3306</code>, er den åben for alle på netværket —
+    inkl. internettet hvis VM'en er public. Brug <code>127.0.0.1:3306:3306</code> eller intet port mapping.
+  </div>
+
+  <h3 id="docker-commands">Kommandoer du SKAL kunne</h3>
+  <table>
+    <tr><th>Kommando</th><th>Hvad</th></tr>
+    <tr><td><code>docker run -it IMAGE bash</code></td><td>Opret ny container med interaktiv shell</td></tr>
+    <tr><td><code>docker exec -it NAME bash</code></td><td>Gå ind i en <em>eksisterende</em> kørende container</td></tr>
+    <tr><td><code>docker ps</code> / <code>docker ps -a</code></td><td>Liste kørende / alle containere</td></tr>
+    <tr><td><code>docker stop / start / rm NAME</code></td><td>Stop / start / fjern container</td></tr>
+    <tr><td><code>docker logs NAME</code></td><td>Se output</td></tr>
+    <tr><td><code>docker images</code> / <code>docker rmi IMAGE</code></td><td>Liste / fjern images</td></tr>
+    <tr><td><code>docker system prune</code></td><td>Ryd alt der ikke bruges (cache, stoppede containere)</td></tr>
+  </table>
+  <div class="tip">
+    <strong>Forskellen <code>run</code> vs <code>exec</code>:</strong> <code>run</code> opretter en NY container.
+    <code>exec</code> går ind i en EKSISTERENDE.
+  </div>
+
+  <div class="demo">
+    Forklar en Dockerfile linje-for-linje · Byg og kør med <code>-it</code> · Forklar en compose.yaml og <code>up</code> den ·
+    Vis <code>docker ps / stop / rm</code> · Prune systemet · Optimér build cache
+  </div>
+  <div class="talk">
+    "En Dockerfile er opskriften, et image er resultatet, og en container er imaget der kører. Docker bygger
+    i layers og cacher dem, så hvis pom.xml ikke har ændret sig, downloader man ikke alle dependencies igen.
+    Multi-stage builds lader os bygge med Maven og shippe med kun JRE — det reducerer image-størrelsen markant."
+  </div>
+</section>
+
+<!-- ========================= 3. TCP/IP ========================= -->
+<section class="category cat-tcpip" id="tcpip">
+  <h2 class="cat-title">3. TCP/IP &amp; OSI-modellen</h2>
+  <p class="cat-sub">Hvordan data flyder gennem netværket — lag for lag.</p>
+
+  <h3 id="osi-layers">OSI-modellen (7 lag) &amp; TCP/IP-modellen (4 lag)</h3>
+  <table>
+    <tr><th>OSI #</th><th>OSI</th><th>TCP/IP</th><th>Eksempel</th></tr>
+    <tr><td>7</td><td>Application</td><td rowspan="3">Application</td><td>HTTP, DNS, SSH</td></tr>
+    <tr><td>6</td><td>Presentation</td><td>TLS, JSON</td></tr>
+    <tr><td>5</td><td>Session</td><td>Sessions, sockets</td></tr>
+    <tr><td>4</td><td>Transport</td><td>Transport</td><td><strong>TCP, UDP</strong></td></tr>
+    <tr><td>3</td><td>Network</td><td>Internet</td><td><strong>IP, ICMP</strong></td></tr>
+    <tr><td>2</td><td>Data Link</td><td rowspan="2">Link</td><td>Ethernet, MAC</td></tr>
+    <tr><td>1</td><td>Physical</td><td>Kabel, radiobølger</td></tr>
+  </table>
+
+  <h3 id="ip-mac">IP-adresse vs MAC-adresse</h3>
+  <table>
+    <tr><th>IP-adresse</th><th>MAC-adresse</th></tr>
+    <tr>
+      <td>Logisk adresse på Network-laget (L3)</td>
+      <td>Fysisk adresse på Data Link-laget (L2)</td>
+    </tr>
+    <tr>
+      <td>Kan ændre sig (DHCP)</td>
+      <td>Bundet til netværkskortet (hardware-burned)</td>
+    </tr>
+    <tr>
+      <td>192.168.1.45 / 2a00:1450::200e</td>
+      <td>00:1A:2B:3C:4D:5E</td>
+    </tr>
+    <tr>
+      <td>Routes globalt</td>
+      <td>Kun lokal (samme L2-segment)</td>
+    </tr>
+  </table>
+  <h4>Hvorfor kan jeg ikke aflæse ek.dk's MAC i WireShark?</h4>
+  <p>MAC-adresser eksisterer kun på <strong>lokalt</strong> netværk. Når en pakke krydser en router, erstattes
+  source MAC med routerens egen MAC. Pakkerne fra ek.dk har derfor din lokale routers MAC som source, ikke
+  serverens.</p>
+
+  <h3 id="router-switch">Router vs Switch</h3>
+  <table>
+    <tr><th>Switch (L2)</th><th>Router (L3)</th></tr>
+    <tr>
+      <td>Forbinder enheder på <em>samme</em> netværk</td>
+      <td>Forbinder <em>forskellige</em> netværk</td>
+    </tr>
+    <tr><td>Bruger MAC-adresser</td><td>Bruger IP-adresser</td></tr>
+    <tr><td>Lærer hvor MAC'er sidder via en MAC-tabel</td><td>Bruger routing-tabeller (statisk eller dynamisk fx OSPF, BGP)</td></tr>
+    <tr><td>Ingen NAT</td><td>Laver typisk NAT mellem LAN og internet</td></tr>
+  </table>
+
+  <h3 id="public-private">Public vs lokal IP-adresse</h3>
+  <ul>
+    <li><strong>Lokal (privat) IP:</strong> <code>192.168.x.x</code>, <code>10.x.x.x</code>, <code>172.16-31.x.x</code> — kun gyldig i dit hjemmenetværk. Tildeles af DHCP.</li>
+    <li><strong>Public IP:</strong> Routerens udadvendte IP. Den verden ser. Find den på <code>ifconfig.me</code> eller <code>curl ifconfig.me</code>.</li>
+    <li><strong>NAT (Network Address Translation):</strong> Routeren oversætter mellem din lokale IP og den publike IP.</li>
+  </ul>
+
+  <h3 id="ports">Porte</h3>
+  <p>Porte er 16-bit tal (0-65535) der identificerer en <strong>service</strong> eller <strong>proces</strong> på en IP.
+  Pr. socket = (IP + port). Det er sådan din computer kan have 10 fanger åbne i browseren mod samme server samtidig.</p>
+  <table>
+    <tr><th>Port</th><th>Service</th></tr>
+    <tr><td>22</td><td>SSH</td></tr>
+    <tr><td>53</td><td>DNS</td></tr>
+    <tr><td>80</td><td>HTTP</td></tr>
+    <tr><td>443</td><td>HTTPS</td></tr>
+    <tr><td>3306</td><td>MySQL</td></tr>
+    <tr><td>8080</td><td>HTTP alternativ (Spring Boot default)</td></tr>
+  </table>
+
+  <h3 id="tcp-vs-udp">TCP vs UDP</h3>
+  <table>
+    <tr><th>TCP</th><th>UDP</th></tr>
+    <tr><td>Forbindelsesorienteret (3-way handshake)</td><td>Forbindelsesløst (fire-and-forget)</td></tr>
+    <tr><td>Pålidelig — retransmission ved tab</td><td>Ingen garanti — pakker kan ryge</td></tr>
+    <tr><td>I rækkefølge (sequence number)</td><td>Ingen ordering</td></tr>
+    <tr><td>Tungere overhead</td><td>Lav latency</td></tr>
+    <tr><td>HTTP, SSH, SMTP, FTP</td><td>DNS, VoIP, video streaming, gaming</td></tr>
+  </table>
+
+  <h3 id="tcp-handshake">TCP handshake (SYN/ACK/FIN)</h3>
+  <pre><code>Client                     Server
+  |                            |
+  |---- SYN (seq=x) --------->|     "Vil du tale?"
+  |                            |
+  |<--- SYN-ACK (seq=y, ack=x+1) ---|  "Ja, lad os tale"
+  |                            |
+  |---- ACK (ack=y+1) -------->|    "Aftale"
+  |                            |
+  |======== DATA ==============|
+  |                            |
+  |---- FIN ----------------->|    "Jeg er færdig"
+  |<--- ACK ------------------|
+  |<--- FIN ------------------|
+  |---- ACK ----------------->|</code></pre>
+  <ul>
+    <li><strong>Sequence Number:</strong> Hvor i bytestrømmen pakken hører hjemme — bruges til at samle data i rækkefølge</li>
+    <li><strong>Acknowledgment Number:</strong> Næste forventede sequence number — bekræfter modtagne bytes</li>
+    <li><strong>src/dst (IP):</strong> Hvor pakken kommer fra / skal hen (network layer)</li>
+    <li><strong>src/dst port (TCP):</strong> Hvilken proces på hver side (transport layer)</li>
+  </ul>
+
+  <h3 id="wireshark">WireShark filtre</h3>
+  <table>
+    <tr><th>Filter</th><th>Effekt</th></tr>
+    <tr><td><code>tcp</code></td><td>Kun TCP-trafik</td></tr>
+    <tr><td><code>dhcp</code></td><td>Kun DHCP-trafik</td></tr>
+    <tr><td><code>http.host == "ek.dk"</code></td><td>Kun HTTP til ek.dk</td></tr>
+    <tr><td><code>ip.addr == 142.250.74.78</code></td><td>Kun trafik til/fra en IP</td></tr>
+    <tr><td><code>tcp.flags.syn == 1</code></td><td>Kun SYN-pakker</td></tr>
+    <tr><td><code>dns.qry.name contains "google"</code></td><td>DNS-queries med "google" i navnet</td></tr>
+  </table>
+
+  <div class="demo">
+    Vis OSI-tegning · Find lokal + public IP · <code>nslookup</code> og <code>ping ek.dk</code> ·
+    WireShark filter på en hjemmeside · Vis DHCP-tildeling · Vis TCP handshake ved <code>curl</code>
+  </div>
+  <div class="talk">
+    "Pakker hierarkisk indkapsles ned gennem lagene: HTTP-data lægges i en TCP-segment (med port-numre),
+    der lægges i en IP-pakke (med IP-adresser), der lægges i en Ethernet-frame (med MAC-adresser).
+    Router-hops fjerner og genskaber Ethernet-frame'n, men IP'er bevares hele vejen. TCP starter med
+    et 3-way handshake (SYN → SYN-ACK → ACK) for at etablere en pålidelig forbindelse."
+  </div>
+</section>
+
+<!-- ========================= 4. HTTP og DNS ========================= -->
+<section class="category cat-dnshttp" id="dnshttp">
+  <h2 class="cat-title">4. HTTP &amp; DNS</h2>
+  <p class="cat-sub">Navneopslag på internettet og protokollen browseren bruger.</p>
+
+  <h3 id="dns-intro">DNS — hvem bestemmer IP'en?</h3>
+  <p>Domain Name System oversætter <code>ek.dk</code> → IP-adresse. Hierarkisk system:</p>
+  <ol>
+    <li><strong>Root servers (.)</strong> — peger på TLD-servere</li>
+    <li><strong>TLD servers (.dk, .com)</strong> — peger på autoritative servere</li>
+    <li><strong>Autoritativ navneserver</strong> — har det reelle svar for domænet (sat op af domæneejeren)</li>
+  </ol>
+  <p><strong>Domæneejeren</strong> (i sidste ende) bestemmer hvilken IP et domæne peger på — via NS-records hos
+  registraren (fx GoDaddy, Cloudflare).</p>
+
+  <h3 id="dns-records">DNS record-typer</h3>
+  <table>
+    <tr><th>Type</th><th>Indhold</th><th>Brug</th></tr>
+    <tr><td><strong>A</strong></td><td>IPv4-adresse</td><td><code>ek.dk → 13.49.1.2</code></td></tr>
+    <tr><td><strong>AAAA</strong></td><td>IPv6-adresse</td><td><code>ek.dk → 2a05:...</code></td></tr>
+    <tr><td><strong>CNAME</strong></td><td>Alias til andet domæne</td><td><code>www.ek.dk → ek.dk</code></td></tr>
+    <tr><td><strong>MX</strong></td><td>Mail-server</td><td><code>ek.dk MX → mail.ek.dk</code></td></tr>
+    <tr><td><strong>TXT</strong></td><td>Vilkårlig tekst</td><td>SPF, DKIM, domain-verification</td></tr>
+    <tr><td><strong>NS</strong></td><td>Navneserver for domænet</td><td><code>ns1.cloudflare.com</code></td></tr>
+  </table>
+
+  <h3 id="dns-ttl">TTL — Time To Live</h3>
+  <p>Hvor mange sekunder en resolver må cache svaret. Højt eller lavt?</p>
+  <ul>
+    <li><strong>Lav TTL (60-300s):</strong> Hurtige ændringer (fx før en migration). Mere DNS-trafik.</li>
+    <li><strong>Høj TTL (3600-86400s):</strong> Mindre belastning, hurtigere opslag for brugere. Tager længere at ændre.</li>
+  </ul>
+  <div class="tip">Før en planlagt IP-ændring: sænk TTL et par dage før. Lav ændringen. Hæv TTL igen.</div>
+
+  <h3 id="authoritative-resolver">Autoritativ navneserver vs cachende resolver</h3>
+  <table>
+    <tr><th>Autoritativ</th><th>Cachende resolver (rekursiv)</th></tr>
+    <tr>
+      <td>Har den "rigtige" svar for sit domæne</td>
+      <td>Spørger andre servere på vegne af klienten</td>
+    </tr>
+    <tr>
+      <td>Sat op af domæneejeren</td>
+      <td>Drives af ISP/Google (8.8.8.8) / Cloudflare (1.1.1.1)</td>
+    </tr>
+    <tr>
+      <td>Returnerer kun for "sine" zoner</td>
+      <td>Cacher svar fra autoritative servere</td>
+    </tr>
+  </table>
+  <h4>Hvordan en rekursiv resolver fungerer</h4>
+  <ol>
+    <li>Klient → resolver: "hvad er IP'en for <code>www.ek.dk</code>?"</li>
+    <li>Resolver → root: "hvem håndterer .dk?"</li>
+    <li>Resolver → .dk TLD: "hvem håndterer ek.dk?"</li>
+    <li>Resolver → autoritativ NS for ek.dk: "hvad er A-record for www?"</li>
+    <li>Resolver returnerer IP til klient + cacher svaret indtil TTL udløber</li>
+  </ol>
+
+  <h3 id="http-methods">HTTP-metoder — GET vs POST (og flere)</h3>
+  <table>
+    <tr><th>Metode</th><th>Brug</th><th>Idempotent?</th></tr>
+    <tr><td><strong>GET</strong></td><td>Hente data. Ingen body. Cacheable.</td><td>Ja</td></tr>
+    <tr><td><strong>POST</strong></td><td>Opret ressource. Body sendes med.</td><td>Nej</td></tr>
+    <tr><td><strong>PUT</strong></td><td>Erstat hele ressourcen.</td><td>Ja</td></tr>
+    <tr><td><strong>PATCH</strong></td><td>Delvis opdatering.</td><td>Nej</td></tr>
+    <tr><td><strong>DELETE</strong></td><td>Slet ressource.</td><td>Ja</td></tr>
+  </table>
+  <div class="warn">Brug aldrig GET til at ændre data — GET bør være sikker og idempotent. Browsere prefetcher GET-requests.</div>
+
+  <h3 id="http-status">HTTP statuskoder</h3>
+  <table>
+    <tr><th>Kategori</th><th>Betydning</th><th>Eksempler</th></tr>
+    <tr><td><strong>1xx</strong></td><td>Informational</td><td>100 Continue, 101 Switching Protocols</td></tr>
+    <tr><td><strong>2xx</strong></td><td>Succes</td><td>200 OK, 201 Created, 204 No Content</td></tr>
+    <tr><td><strong>3xx</strong></td><td>Redirect</td><td>301 Moved, 302 Found, 304 Not Modified</td></tr>
+    <tr><td><strong>4xx</strong></td><td>Klient-fejl</td><td>400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 429 Too Many Requests</td></tr>
+    <tr><td><strong>5xx</strong></td><td>Server-fejl</td><td>500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable</td></tr>
+  </table>
+
+  <h3 id="http-headers">Accept vs Content-Type</h3>
+  <table>
+    <tr><th>Header</th><th>Sendt af</th><th>Betydning</th></tr>
+    <tr><td><code>Accept: application/json</code></td><td>Klient</td><td>"Jeg vil gerne have svaret som JSON"</td></tr>
+    <tr><td><code>Content-Type: application/json</code></td><td>Den der sender body</td><td>"Det jeg sender ER JSON"</td></tr>
+  </table>
+
+  <h3 id="http-stateless">HTTP er stateless — hvordan forbliver man logget ind?</h3>
+  <p>HTTP husker ikke noget mellem requests. Tre mekanismer:</p>
+  <ul>
+    <li><strong>Cookies + sessions:</strong> Server gemmer session-data, sender en <code>SESSIONID</code> cookie tilbage til klienten. Klienten sender cookien med hver request.</li>
+    <li><strong>JWT (token):</strong> Server signerer en token med brugerinfo. Klienten sender den i <code>Authorization: Bearer ...</code></li>
+    <li><strong>OAuth2:</strong> Tredjeparts identity provider (Google, GitHub) udsteder access tokens</li>
+  </ul>
+
+  <div class="demo">
+    <code>nslookup ek.dk</code> · <code>dig ek.dk +trace</code> · DevTools netværksfanen ·
+    <code>curl -v</code> mod egen VM · WireShark HTTP request/response
+  </div>
+  <div class="talk">
+    "DNS er internettets telefonbog. Du beder en rekursiv resolver, som spørger root → TLD → autoritativ
+    navneserver, og cacher svaret. Domæneejeren bestemmer indholdet via NS-records hos sin registrar.
+    HTTP er stateless, så sessions opretholdes via cookies eller tokens. GET er for at hente data,
+    POST for at oprette — GET er idempotent og bør være sikker (browseren prefetcher dem)."
+  </div>
+</section>
+
+<!-- ========================= 5. Linux ========================= -->
+<section class="category cat-linux" id="linux">
+  <h2 class="cat-title">5. Linux-terminalen</h2>
+  <p class="cat-sub">Navigation, filhåndtering, pipes, rettigheder og SSH.</p>
+
+  <h3 id="terminal-shell">Terminal vs Shell vs Kommando</h3>
+  <table>
+    <tr><th>Terminal</th><th>Shell</th><th>Kommando</th></tr>
+    <tr>
+      <td>Programmet du <em>ser</em> (cmd.exe, iTerm, Terminal.app, Windows Terminal)</td>
+      <td>Programmet der <em>fortolker</em> det du skriver (<code>bash</code>, <code>zsh</code>, <code>fish</code>, <code>cmd</code>)</td>
+      <td>Det enkelte program du <em>kører</em> (<code>ls</code>, <code>grep</code>, <code>docker</code>)</td>
+    </tr>
+  </table>
+  <div class="tip">Analogi: terminal = vinduet, shell = stikket der oversætter, kommando = programmet stikket starter.</div>
+
+  <h3 id="linux-navigation">Navigation</h3>
+  <table>
+    <tr><th>Kommando</th><th>Hvad</th></tr>
+    <tr><td><code>pwd</code></td><td>Hvor er jeg?</td></tr>
+    <tr><td><code>ls</code> / <code>ls -la</code></td><td>List indhold (med skjulte filer)</td></tr>
+    <tr><td><code>cd /path</code> / <code>cd ..</code> / <code>cd ~</code></td><td>Skift mappe / op et niveau / hjem</td></tr>
+    <tr><td><code>mkdir mappe</code> / <code>mkdir -p a/b/c</code></td><td>Opret mappe (rekursivt)</td></tr>
+  </table>
+
+  <h3 id="linux-files">Filhåndtering &amp; teksteditor</h3>
+  <table>
+    <tr><th>Kommando</th><th>Hvad</th></tr>
+    <tr><td><code>touch fil.txt</code></td><td>Opret tom fil</td></tr>
+    <tr><td><code>cat / less / head / tail</code></td><td>Vis indhold (hele/scrollbar/første 10/sidste 10)</td></tr>
+    <tr><td><code>nano fil.txt</code> / <code>vim fil.txt</code></td><td>Terminal-teksteditor</td></tr>
+    <tr><td><code>cp src dest</code> / <code>cp -r src dest</code></td><td>Kopiér fil / mappe</td></tr>
+    <tr><td><code>mv src dest</code></td><td>Flyt / omdøb</td></tr>
+    <tr><td><code>rm fil</code> / <code>rm -r mappe</code></td><td>Slet fil / mappe (rekursivt)</td></tr>
+  </table>
+
+  <h3 id="linux-search">Søgning, pipes &amp; redirection</h3>
+  <table>
+    <tr><th>Operator</th><th>Hvad</th></tr>
+    <tr><td><code>&gt;</code></td><td>Skriv (overskriv) output til fil: <code>ls &gt; out.txt</code></td></tr>
+    <tr><td><code>&gt;&gt;</code></td><td>Append til fil: <code>echo "more" &gt;&gt; log.txt</code></td></tr>
+    <tr><td><code>|</code></td><td>Pipe output til næste kommando: <code>ls -la | grep ".md"</code></td></tr>
+    <tr><td><code>2&gt;</code></td><td>Redirect kun stderr</td></tr>
+  </table>
+  <h4>Søgning i tekstfiler</h4>
+  <pre><code>grep "TODO" *.java                  # find linjer der matcher
+grep -r "TODO" .                    # rekursivt
+grep -ni "error" log.txt            # ignorér case, vis linje#
+head -n 20 fil.log                  # første 20 linjer
+tail -f fil.log                     # følg filen live</code></pre>
+  <div class="warn">
+    <strong>Pas på overskrivning:</strong> <code>kommando &gt; fil.txt</code> rydder fil.txt før det skriver.
+    Brug <code>&gt;&gt;</code> for at appende, eller <code>set -o noclobber</code> i bash for at forhindre overskrivning helt.
+  </div>
+
+  <h3 id="linux-perms">Filrettigheder &amp; chmod</h3>
+  <p>En typisk visning fra <code>ls -la</code>:</p>
+  <pre><code>-rwxr--r--   1  mikkel  staff   1024  Jan  3  script.sh
+└─┬─┘├─┬─┘├─┬─┘
+  │   │   └── world (alle andre): læse
+  │   └────── group: læse
+  └────────── owner: læse, skrive, eksekvere</code></pre>
+  <table>
+    <tr><th>Bit</th><th>r</th><th>w</th><th>x</th></tr>
+    <tr><td>Værdi</td><td>4</td><td>2</td><td>1</td></tr>
+  </table>
+  <pre><code>chmod 755 script.sh      # rwxr-xr-x  (owner alt, group/world r+x)
+chmod 644 data.txt       # rw-r--r--  (owner rw, andre r)
+chmod +x script.sh       # tilføj eksekver-bit for alle</code></pre>
+
+  <h3 id="ssh">SSH &amp; public key authentication</h3>
+  <p>SSH (Secure Shell) er en krypteret protokol til remote-login (port 22). To måder at autentificere:</p>
+  <ol>
+    <li><strong>Password</strong> — usikkert, kan brute-forces</li>
+    <li><strong>Public key</strong> — kryptografisk, ingen passwords on the wire</li>
+  </ol>
+  <h4>Sådan virker public key auth</h4>
+  <ol>
+    <li>Klient genererer nøglepar: <code>ssh-keygen -t ed25519</code> → <code>id_ed25519</code> (privat) + <code>id_ed25519.pub</code> (offentlig)</li>
+    <li>Offentlig nøgle kopieres til serveren: <code>~/.ssh/authorized_keys</code> (fx via <code>ssh-copy-id</code>)</li>
+    <li>Ved login: serveren sender en challenge → klienten signerer med privat nøgle → serveren verificerer med public key</li>
+    <li>Den private nøgle forlader <em>aldrig</em> klienten</li>
+  </ol>
+  <pre><code>ssh user@vm-ip                            # login
+ssh -i ~/.ssh/id_ed25519 user@vm-ip       # specifik nøgle
+ssh -p 2222 user@vm-ip                    # anden port</code></pre>
+
+  <h3 id="scp">SCP — filoverførsel over SSH</h3>
+  <pre><code>scp lokal.txt user@vm:/home/user/         # upload
+scp user@vm:/var/log/app.log .            # download
+scp -r mappe/ user@vm:~/                  # rekursivt</code></pre>
+
+  <div class="demo">
+    Opret &amp; navigér mapper · Rediger med nano · SCP en fil · <code>grep</code> i log ·
+    Pipe <code>ls | grep</code> · <code>echo "x" &gt;&gt; fil.txt</code> · Forklar <code>-rwxr--r--</code> · <code>chmod 755</code>
+  </div>
+  <div class="talk">
+    "Terminalen er vinduet, shellen (bash) er fortolkeren, og kommandoer som <code>ls</code> er programmerne den kører.
+    Filrettigheder har tre grupper — owner/group/world — hver med rwx. <code>chmod 755</code> giver owner alt,
+    andre kun læse+eksekver. SSH bruger public key auth: jeg genererer et nøglepar, lægger den offentlige
+    på serveren, og signerer med min private — som aldrig forlader min maskine."
+  </div>
+</section>
+
+<!-- ========================= 6. Cloud ========================= -->
+<section class="category cat-cloud" id="cloud">
+  <h2 class="cat-title">6. Cloud</h2>
+  <p class="cat-sub">VMs, deployment og firewalls i skyen.</p>
+
+  <h3 id="iaas-paas">IaaS, PaaS, SaaS</h3>
+  <table>
+    <tr><th>Model</th><th>Du styrer</th><th>Eksempler</th></tr>
+    <tr>
+      <td><strong>IaaS</strong> (Infrastructure)</td>
+      <td>OS, runtime, app — alt fra VM'en og op</td>
+      <td>AWS EC2, Azure VM, DigitalOcean Droplet</td>
+    </tr>
+    <tr>
+      <td><strong>PaaS</strong> (Platform)</td>
+      <td>Kun din kode</td>
+      <td>Heroku, Vercel, Railway, AWS Elastic Beanstalk</td>
+    </tr>
+    <tr>
+      <td><strong>SaaS</strong> (Software)</td>
+      <td>Intet — bruger bare</td>
+      <td>Gmail, Dropbox, GitHub</td>
+    </tr>
+  </table>
+
+  <h3 id="cloud-products">Cloud-produkter ud over VMs</h3>
+  <ul>
+    <li><strong>Object storage:</strong> AWS S3, Azure Blob — store filer (billeder, backups)</li>
+    <li><strong>Managed databases:</strong> RDS, Cloud SQL, Neon — Postgres/MySQL uden at vedligeholde serveren</li>
+    <li><strong>Container services:</strong> ECS, GKE, Azure Container Instances</li>
+    <li><strong>Serverless functions:</strong> AWS Lambda, Cloudflare Workers — kør kode uden VM</li>
+    <li><strong>CDN:</strong> CloudFront, Cloudflare — cache statiske assets globalt</li>
+    <li><strong>Identity:</strong> AWS IAM, Auth0</li>
+  </ul>
+
+  <h3 id="deploy-spring">Deploy en Spring Boot-app i cloud'en</h3>
+  <ol>
+    <li>Byg en jar med <code>mvn package</code> — eller et Docker image</li>
+    <li>Provisionér en VM (fx Azure VM med Ubuntu)</li>
+    <li>Installér Java/Docker på VM'en</li>
+    <li>Upload artefakt (<code>scp</code>, eller <code>docker pull</code> fra registry)</li>
+    <li>Kør som systemd-service eller <code>docker compose up -d</code></li>
+    <li>Åbn port 8080 (eller 80/443 bag en reverse proxy som Nginx)</li>
+    <li>Sæt DNS til VM'ens public IP</li>
+  </ol>
+
+  <h3 id="cd-pipeline">CD-delen af et workflow</h3>
+  <pre><code>jobs:
+  deploy:
+    needs: build                          # vent på build-job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key:      ${{ secrets.SSH_KEY }}
+          script: |
+            cd /opt/myapp
+            docker compose pull
+            docker compose up -d</code></pre>
+
+  <h3 id="firewall">Firewall-regler &amp; sikkerhed</h3>
+  <p>Cloud-VMs har typisk to lag firewall:</p>
+  <ol>
+    <li><strong>Cloud-firewall (Security Group / NSG):</strong> Styres i cloud-konsollen — hvilke porte er åbne udefra</li>
+    <li><strong>OS-firewall (<code>ufw</code> / <code>iptables</code>):</strong> På selve VM'en</li>
+  </ol>
+  <pre><code>sudo ufw allow 22/tcp                     # SSH
+sudo ufw allow 80/tcp                     # HTTP
+sudo ufw allow 443/tcp                    # HTTPS
+sudo ufw enable
+sudo ufw status</code></pre>
+  <h4>Docker port-konfiguration &amp; sikkerhed</h4>
+  <div class="warn">
+    Docker omgår ofte <code>ufw</code>! Hvis du publisher <code>-p 3306:3306</code>, kan databasen være
+    eksponeret selvom <code>ufw</code> "blokerer" port 3306. Brug enten <code>-p 127.0.0.1:3306:3306</code>
+    eller intet host-port (lad Docker's interne netværk håndtere det).
+  </div>
+
+  <div class="demo">
+    Vis CD-job i GHA · Ændr firewall-regel for en VM (Azure portal eller <code>ufw</code>) ·
+    Log ind på VM med SSH
+  </div>
+  <div class="talk">
+    "IaaS giver mig en VM som jeg selv vedligeholder; PaaS skjuler infrastrukturen og kører bare min kode.
+    Jeg deployer Spring Boot enten ved at uploade en jar med scp og køre den som systemd-service, eller
+    ved at bygge et Docker image, pushe til registry, og pulle fra VM'en med <code>docker compose</code>.
+    Firewall-mæssigt skal jeg passe på Docker — den omgår ufw — så databaser binder jeg kun til 127.0.0.1."
+  </div>
+</section>
+
+<!-- ========================= 7. Kryptering ========================= -->
+<section class="category cat-krypt" id="krypt">
+  <h2 class="cat-title">7. Kryptering &amp; sikkerhed</h2>
+  <p class="cat-sub">Symmetrisk/asymmetrisk, hashing, TLS, certifikater, SSH, VPN.</p>
+
+  <h3 id="sym-asym">Symmetrisk vs asymmetrisk kryptering</h3>
+  <table>
+    <tr><th>Symmetrisk</th><th>Asymmetrisk</th></tr>
+    <tr>
+      <td>Samme nøgle krypterer + dekrypterer</td>
+      <td>Public + private key pair</td>
+    </tr>
+    <tr>
+      <td>Hurtig — bruges til store mængder data</td>
+      <td>Langsom — bruges til nøgleudveksling og signaturer</td>
+    </tr>
+    <tr><td>AES, ChaCha20</td><td>RSA, ECDSA, Ed25519</td></tr>
+    <tr>
+      <td>Problem: hvordan dele nøglen sikkert?</td>
+      <td>Løsning: public key kan deles frit, kun privat skal beskyttes</td>
+    </tr>
+  </table>
+  <div class="tip">
+    <strong>I praksis kombineres begge:</strong> TLS bruger asymmetrisk til at forhandle en symmetrisk session-key,
+    og derefter symmetrisk for selve trafikken.
+  </div>
+
+  <h3 id="hashing">Hash-funktioner</h3>
+  <p>En hash er en envejs-funktion: input → fixed-size output. Man kan IKKE få inputtet tilbage.</p>
+  <table>
+    <tr><th>Hash</th><th>Kryptering</th></tr>
+    <tr><td>Envejs (kan ikke reverseres)</td><td>Tovejs (kan dekrypteres med nøgle)</td></tr>
+    <tr><td>Bruges til verifikation (passwords, integritet)</td><td>Bruges til hemmeligholdelse</td></tr>
+    <tr><td>SHA-256, BCrypt, Argon2</td><td>AES, RSA</td></tr>
+  </table>
+  <p>Eksempel: passwords gemmes som bcrypt-hash. Når du logger ind, hashes dit input og sammenlignes med det gemte.</p>
+
+  <h3 id="signatures">Digitale signaturer</h3>
+  <p>Bruger asymmetrisk crypto til at bevise <strong>autenticitet</strong> og <strong>integritet</strong>.</p>
+  <ol>
+    <li>Afsender hasher beskeden → H</li>
+    <li>Afsender krypterer H med sin <strong>private</strong> nøgle → signatur</li>
+    <li>Modtager dekrypterer signaturen med afsenderens <strong>public</strong> key → H'</li>
+    <li>Modtager hasher selv beskeden → H. Hvis H == H', er signaturen gyldig.</li>
+  </ol>
+  <p>Bruges til: TLS-certifikater, GPG-signed emails, Git commits, software releases.</p>
+
+  <h3 id="gpg">GPG (GNU Privacy Guard)</h3>
+  <p>Værktøj til asymmetrisk kryptering + signering — typisk bruges til emails og filer.</p>
+  <pre><code>gpg --gen-key                          # generér nøglepar
+gpg --export -a "Mikkel" &gt; mig.asc     # eksportér public key
+gpg --encrypt -r "modtager" hemmelig.txt
+gpg --decrypt hemmelig.txt.gpg
+gpg --sign vigtig.txt                  # signér
+gpg --verify vigtig.txt.sig</code></pre>
+
+  <h3 id="tls">TLS handshake</h3>
+  <p>HTTPS = HTTP over TLS. Handshake'et opretter en krypteret tunnel mellem klient og server:</p>
+  <ol>
+    <li><strong>ClientHello:</strong> "Jeg understøtter disse cipher suites + TLS-versioner"</li>
+    <li><strong>ServerHello:</strong> "Vi bruger denne cipher suite. Her er mit certifikat."</li>
+    <li><strong>Certificate:</strong> Server sender X.509-certifikat (med public key)</li>
+    <li><strong>Key Exchange:</strong> Klient + server forhandler en delt session-key (typisk ECDHE)</li>
+    <li><strong>Finished:</strong> Begge bekræfter — al fremtidig trafik er krypteret med session-keyen</li>
+  </ol>
+  <div class="tip">
+    I WireShark kan du se ClientHello, ServerHello og Certificate i klartekst — men efter handshake er
+    selve HTTP-data krypteret og fremstår som "Application Data".
+  </div>
+
+  <h3 id="cert-chain">Certifikatkæde &amp; Certificate Authority (CA)</h3>
+  <p>Et certifikat siger: "Denne public key tilhører ek.dk". Men hvem siger det? En CA. Hvem stoler vi på CA'en?
+  Den er signeret af en højere CA. Helt i toppen: <strong>Root CA</strong>'er som operativsystemet/browseren stoler på out-of-the-box.</p>
+  <pre><code>ek.dk (leaf cert)
+  ↑ signeret af
+Let's Encrypt R3 (intermediate)
+  ↑ signeret af
+ISRG Root X1 (Root CA — i din browser/OS trust store)</code></pre>
+  <h4>Hvorfor stoler browseren på Let's Encrypt?</h4>
+  <p>Fordi ISRG Root X1 (Let's Encrypt's root) ligger i din browsers/OS's trust store. Hver leaf-certifikat
+  fra Let's Encrypt kan spores op til den rod — det kaldes <strong>certificate path validation</strong>.</p>
+  <h4>Hvorfor kan jeg se HTTP men ikke HTTPS i WireShark?</h4>
+  <p>HTTP er klartekst — WireShark ser hver byte. HTTPS er TLS-krypteret efter handshake — uden serverens
+  private nøgle (eller en MITM i din browser) kan WireShark kun se metadata: hostname (via SNI), port, pakkestørrelser.</p>
+
+  <h3 id="ssh-keys">SSH public key authentication — under motorhjelmen</h3>
+  <ol>
+    <li>Klient sender public key til server</li>
+    <li>Server tjekker om den ligger i <code>~/.ssh/authorized_keys</code></li>
+    <li>Server sender en tilfældig challenge til klient</li>
+    <li>Klient signerer challenge med sin <strong>private</strong> key</li>
+    <li>Server verificerer signaturen med klientens public key → login godkendt</li>
+  </ol>
+  <table>
+    <tr><th>Fil</th><th>Indhold</th><th>Må deles?</th></tr>
+    <tr><td><code>id_ed25519</code></td><td>PRIVAT nøgle</td><td><strong>NEJ</strong> — aldrig nogensinde</td></tr>
+    <tr><td><code>id_ed25519.pub</code></td><td>PUBLIC nøgle</td><td>Ja — fx i GitHub, authorized_keys</td></tr>
+  </table>
+
+  <h3 id="ssh-tunnel">SSH tunnel (port forwarding)</h3>
+  <p>Bruger SSH-forbindelsen som krypteret tunnel for vilkårlig TCP-trafik.</p>
+  <pre><code>ssh -L 8080:localhost:80 user@vm
+# Min lokale port 8080 → SSH → VM'ens localhost:80
+# Browser → http://localhost:8080 = krypteret rejse til VM'ens Nginx</code></pre>
+  <p><strong>Hvornår nyttigt?</strong></p>
+  <ul>
+    <li>Tilgå en database som kun lytter på VM'ens 127.0.0.1 (sikker default)</li>
+    <li>Komme til en intern service uden at åbne en port udadtil</li>
+    <li>Browse via et andet land's IP (<code>-D</code> SOCKS proxy)</li>
+  </ul>
+  <p>Trafikken er krypteret fordi den løber inde i SSH-forbindelsen — selv hvis appen ikke selv bruger TLS.</p>
+
+  <h3 id="vpn">VPN &amp; WireGuard</h3>
+  <table>
+    <tr><th>SSH tunnel</th><th>VPN (WireGuard)</th></tr>
+    <tr>
+      <td>Kun TCP, port-for-port</td>
+      <td>Hele netværket — al IP-trafik</td>
+    </tr>
+    <tr>
+      <td>Per-app konfiguration</td>
+      <td>System-niveau (route table)</td>
+    </tr>
+    <tr>
+      <td>Bruger TCP (kan have head-of-line blocking)</td>
+      <td>WireGuard bruger UDP — hurtigere</td>
+    </tr>
+    <tr>
+      <td>Til adhoc / dev-adgang</td>
+      <td>Til at koble netværk sammen permanent</td>
+    </tr>
+  </table>
+  <p><strong>WireGuard</strong> er en moderne VPN-protokol: meget lille codebase (~4000 linjer), bruger
+  Curve25519 + ChaCha20-Poly1305, public/private keys pr. peer, kører i kernel space → meget hurtigt.</p>
+
+  <div class="demo">
+    <code>openssl enc -aes-256-cbc</code> (kryptér fil) · GPG nøglepar + krypter besked ·
+    <code>ssh-keygen -t ed25519</code> · <code>openssl s_client -connect ek.dk:443</code> ·
+    TLS handshake i WireShark · SSH tunnel demo · WireGuard mellem to VM'er
+  </div>
+  <div class="talk">
+    "Symmetrisk kryptering er hurtig men kræver at parterne har samme nøgle — asymmetrisk løser det med et
+    public/private key pair. I praksis bruges begge: TLS forhandler en symmetrisk session-key via asymmetrisk.
+    Hashing er envejs — bruges til passwords (bcrypt) og signaturer (man signerer hashen, ikke hele beskeden).
+    Browseren stoler på Let's Encrypt fordi deres root CA er pre-installeret i OS'ets trust store, og hvert
+    cert kan spores tilbage til den rod."
+  </div>
+</section>
+
+<!-- ========================= UGEOVERSIGT ========================= -->
+<section class="category cat-cicd" id="week-overview" style="--c:#f472b6">
+  <h2 class="cat-title">📅 Ugeoversigt — TEK2-Student</h2>
+  <p class="cat-sub">Links til materialet for hver uge. Hver mappe har <code>pre-class/</code>, <code>class/</code>, <code>post-class/</code> og <code>quick-reference.md</code>.</p>
+  <table>
+    <tr><th>Uge</th><th>Emne</th><th>Mappe</th></tr>
+    <tr><td>1</td><td>Docker + Linux Basics</td><td><a href="../teknologi/week-01-docker-linux-basics/" style="color:#f472b6">week-01</a></td></tr>
+    <tr><td>2</td><td>Docker Build &amp; Compose</td><td><a href="../teknologi/week-02-docker-build-compose/" style="color:#f472b6">week-02</a></td></tr>
+    <tr><td>3</td><td>Maven + GitHub Actions</td><td><a href="../teknologi/week-03-maven-github-actions/" style="color:#f472b6">week-03</a></td></tr>
+    <tr><td>4</td><td>Cloud + Linux Server</td><td><a href="../teknologi/week-04-vms-linux-server/" style="color:#f472b6">week-04</a></td></tr>
+    <tr><td>5</td><td>Networking Basics</td><td><a href="../teknologi/week-05-networking-basics/" style="color:#f472b6">week-05</a></td></tr>
+    <tr><td>6-7</td><td>Project Week</td><td><a href="../teknologi/week-06-project/" style="color:#f472b6">week-06</a></td></tr>
+    <tr><td>8</td><td>HTTP / HTTPS</td><td><a href="../teknologi/week-08-http-https/" style="color:#f472b6">week-08</a></td></tr>
+    <tr><td>9</td><td>DNS &amp; Certificates</td><td><a href="../teknologi/week-09-dns-certificates/" style="color:#f472b6">week-09</a></td></tr>
+    <tr><td>10</td><td>Encryption + Security</td><td><a href="../teknologi/week-10-encryption-security/" style="color:#f472b6">week-10</a></td></tr>
+    <tr><td>11</td><td>OSI Model, IPv6 &amp; VPN</td><td><a href="../teknologi/week-11-osi-ipv6-vpn/" style="color:#f472b6">week-11</a></td></tr>
+    <tr><td>12</td><td>AI Project</td><td><a href="../teknologi/week-12-ai-project/" style="color:#f472b6">week-12</a></td></tr>
+    <tr><td>13</td><td>Exam Preparation</td><td><a href="../teknologi/week-13-exam-preparation/" style="color:#f472b6">week-13</a></td></tr>
+    <tr><td>14-16</td><td>Group Project</td><td><a href="../teknologi/week-14-group-project/" style="color:#f472b6">week-14</a></td></tr>
+  </table>
+  <div class="tip">
+    Eksamensspørgsmålene er samlet i <a href="../teknologi/exam_questions.md" style="color:#f472b6"><code>exam_questions.md</code></a>.
+  </div>
+</section>
+
+</main>
+
+<script>
+  // Søgefunktion
+  const searchBox = document.getElementById('searchBox');
+  const sections = document.querySelectorAll('section.category');
+  const sidebarLinks = document.querySelectorAll('.sidebar a:not(.home)');
+  const noResults = document.getElementById('noResults');
+
+  function clearHighlights(root) {
+    root.querySelectorAll('mark').forEach(m => {
+      const parent = m.parentNode;
+      parent.replaceChild(document.createTextNode(m.textContent), m);
+      parent.normalize();
+    });
+  }
+
+  function highlight(root, term) {
+    if (!term) return;
+    const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: node => {
+        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (node.parentElement.closest('script, style, mark')) return NodeFilter.FILTER_REJECT;
+        return regex.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(node => {
+      const frag = document.createDocumentFragment();
+      node.nodeValue.split(regex).forEach(part => {
+        if (regex.test(part)) {
+          const m = document.createElement('mark');
+          m.textContent = part;
+          frag.appendChild(m);
+        } else {
+          frag.appendChild(document.createTextNode(part));
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+
+  searchBox.addEventListener('input', e => {
+    const term = e.target.value.trim().toLowerCase();
+    sections.forEach(s => clearHighlights(s));
+
+    if (!term) {
+      sections.forEach(s => s.classList.remove('search-hidden'));
+      sidebarLinks.forEach(a => a.classList.remove('search-hidden'));
+      noResults.classList.remove('show');
+      return;
+    }
+
+    let any = false;
+    sections.forEach(s => {
+      const match = s.innerText.toLowerCase().includes(term);
+      s.classList.toggle('search-hidden', !match);
+      if (match) {
+        any = true;
+        highlight(s, term);
+      }
+    });
+    sidebarLinks.forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const target = document.querySelector(href);
+      const visible = target && !target.closest('section.category')?.classList.contains('search-hidden');
+      a.classList.toggle('search-hidden', !visible);
+    });
+    noResults.classList.toggle('show', !any);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== searchBox) {
+      e.preventDefault();
+      searchBox.focus();
+    }
+    if (e.key === 'Escape' && document.activeElement === searchBox) {
+      searchBox.value = '';
+      searchBox.dispatchEvent(new Event('input'));
+      searchBox.blur();
+    }
+  });
+</script>
+
+</body>
+</html>

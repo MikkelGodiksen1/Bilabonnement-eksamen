@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<title>Bilabonnement - Alle Flows</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "SF Pro Display", "Helvetica Neue", sans-serif;
+    background: linear-gradient(180deg, #0a0e1f 0%, #050810 100%);
+    color: #fff;
+    min-height: 100vh;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    font-size: 42px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #60a5fa, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .subtitle {
+    color: #94a3b8;
+    font-size: 18px;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+  }
+  .card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,0.1);
+    border-color: var(--c, #60a5fa);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--c, #60a5fa);
+  }
+  .card .num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--c, #60a5fa);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .card h2 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .card p {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+  .card .arrow {
+    margin-top: 12px;
+    color: var(--c, #60a5fa);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .sprint3 {
+    --c: #34c759;
+    background: linear-gradient(180deg, rgba(52,199,89,0.1) 0%, rgba(255,255,255,0.04) 100%);
+    border-color: rgba(52,199,89,0.3);
+  }
+  .reference {
+    --c: #f472b6;
+    background: linear-gradient(180deg, rgba(244,114,182,0.12) 0%, rgba(255,255,255,0.04) 100%);
+    border-color: rgba(244,114,182,0.3);
+    grid-column: span 2;
+  }
+  .pensum3 {
+    --c: #fbbf24;
+    background: linear-gradient(180deg, rgba(251,191,36,0.12) 0%, rgba(255,255,255,0.04) 100%);
+    border-color: rgba(251,191,36,0.3);
+    grid-column: span 2;
+  }
+  .programmering3 {
+    --c: #22d3ee;
+    background: linear-gradient(180deg, rgba(34,211,238,0.12) 0%, rgba(255,255,255,0.04) 100%);
+    border-color: rgba(34,211,238,0.3);
+    grid-column: span 2;
+  }
+  .teknologi3 {
+    --c: #f472b6;
+    background: linear-gradient(180deg, rgba(244,114,182,0.12) 0%, rgba(255,255,255,0.04) 100%);
+    border-color: rgba(244,114,182,0.3);
+    grid-column: span 2;
+  }
+  @media (max-width: 700px) {
+    .reference { grid-column: span 1; }
+    .pensum3 { grid-column: span 1; }
+    .programmering3 { grid-column: span 1; }
+    .teknologi3 { grid-column: span 1; }
+  }
+  .section-title {
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #94a3b8;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding-left: 4px;
+    border-left: 3px solid #60a5fa;
+    padding-left: 12px;
+  }
+  .section-title:first-of-type { margin-top: 0; }
+</style>
+</head>
+<body>
+  <h1>Bilabonnement Flows</h1>
+  <p class="subtitle">Visuelle animationer af alle brugerflows + UML + Scrum + komplet pensum-reference</p>
+
+  <div class="section-title">📖 Komplet pensum-opslagsværk</div>
+  <div class="grid">
+    <a class="card reference" href="PENSUM-REFERENCE.html">
+      <div class="num">⭐ NY · Reference</div>
+      <h2>Pensum Reference - Systemudvikling</h2>
+      <p>Komplet opslagsværk for ALT systemudviklings-pensum: GRASP-patterns, FURPS+, Normal Forms, MVC vs Layered, State Diagrams, Testing (black/white/grey box), Operational Contracts, Shneidermans Golden Rules, Gestalt Laws, Planning Poker, Object Design, FTR & Reviews + meget mere. Med sticky sidebar-navigation.</p>
+      <div class="arrow">Åbn opslagsværk →</div>
+    </a>
+    <a class="card pensum3" href="3-SEMESTER-PENSUM.html">
+      <div class="num">📚 NY · 3. semester systemudvikling</div>
+      <h2>3. Semester Pensum - Systemudvikling</h2>
+      <p>Komplet opslagsværk for 3. semester systemudvikling med søgefunktion: Procesmodeller (Waterfall, V-Model, Spiral, RUP), Agile &amp; XP (12 praksisser, TDD, Pair Programming), Scaling SCRUM (SAFe, LeSS, Nexus, Spotify), CBD/COTS, Project Management (4 P'er, W5HH), Scheduling (CPM, Gantt, EVA), Estimation (LOC, FP, COCOMO, Use Case Points), Risk (RMMM), Maintenance (4 typer), Metrics (Cyclomatic, Halstead, Cohesion/Coupling, GQM), SPI (CMMI, PSP, TSP), SCM og DFD. Hver sektion forklarer hvad, hvornår og hvordan + link til original-slides.</p>
+      <div class="arrow">Åbn opslagsværk →</div>
+    </a>
+    <a class="card programmering3" href="3-SEMESTER-PROGRAMMERING.html">
+      <div class="num">💻 NY · 3. semester programmering</div>
+      <h2>3. Semester Pensum - Programmering</h2>
+      <p>Komplet opslagsværk for 3. semester programmering med søgefunktion: REST API (HTTP-metoder, status-koder, ResponseEntity), JPA (@Entity, @OneToOne, @OneToMany, @ManyToMany, DTOs, EAGER/LAZY, CascadeType), Exception Handling (checked/unchecked, try-with-resources, @ControllerAdvice), JavaScript (DOM, events, Fetch, async/await, moduler), Functional Programming (lambdas, Stream API, pure functions, immutability), Spring Security (filter chain, UserDetailsService, BCrypt, roles), Auth (sessions, JWT, OAuth2, cookies), Web Security (XSS, CSRF, SQL injection, CSP, HTTPS), Hashing (BCrypt, salt, pepper, rainbow tables) og 24h eksamensprojekt-strategi (DronePizza, Siren Alert, Kapsejlads).</p>
+      <div class="arrow">Åbn opslagsværk →</div>
+    </a>
+    <a class="card teknologi3" href="TEKNOLOGI-PENSUM.html">
+      <div class="num">🐳 NY · Teknologi 2</div>
+      <h2>Teknologi 2 - Pensum</h2>
+      <p>Komplet opslagsværk for Teknologi 2 (Containerization &amp; DevOps) med søgefunktion. Dækker alle 7 eksamensemner: CI/CD &amp; GitHub Actions (jobs, steps, caching, hash-pinning, workflow_dispatch), Docker (Dockerfile, images, containers, build cache, multi-stage builds, Compose, volumes, port mapping), TCP/IP (OSI-lag, IP vs MAC, router vs switch, ports, TCP vs UDP, SYN/ACK/FIN, WireShark), HTTP &amp; DNS (record-typer, TTL, rekursiv resolver, HTTP-metoder, status-koder, stateless &amp; sessions), Linux-terminalen (navigation, pipes, chmod, SSH, SCP), Cloud (IaaS/PaaS, deploy, firewall) og Kryptering (symmetrisk/asymmetrisk, hashing, signaturer, GPG, TLS handshake, certifikatkæder, SSH tunnels, WireGuard VPN). Med ugeoversigt og direkte links til TEK2-Student materialerne.</p>
+      <div class="arrow">Åbn opslagsværk →</div>
+    </a>
+  </div>
+
+  <div class="section-title">🎬 Brugerflows (animationer)</div>
+  <div class="grid">
+    <a class="card" href="FLOW-login.html" style="--c:#60a5fa">
+      <div class="num">Flow 1</div>
+      <h2>Login</h2>
+      <p>Sådan logger en medarbejder ind med username og password.</p>
+      <div class="arrow">Åbn animation →</div>
+    </a>
+    <a class="card" href="FLOW-opret-lejekontrakt.html" style="--c:#34d399">
+      <div class="num">Flow 2</div>
+      <h2>Opret Lejekontrakt</h2>
+      <p>Vis form og gem ny lejekontrakt - GET og POST.</p>
+      <div class="arrow">Åbn animation →</div>
+    </a>
+    <a class="card" href="FLOW-registrer-skade.html" style="--c:#a78bfa">
+      <div class="num">Flow 3</div>
+      <h2>Registrer Skade</h2>
+      <p>Vis form og gem ny skadesrapport med foreign keys.</p>
+      <div class="arrow">Åbn animation →</div>
+    </a>
+    <a class="card" href="FLOW-aktive-kontrakter.html" style="--c:#fb923c">
+      <div class="num">Flow 4</div>
+      <h2>Se Aktive Kontrakter</h2>
+      <p>JOIN over 3 tabeller med beregnede KPI'er.</p>
+      <div class="arrow">Åbn animation →</div>
+    </a>
+    <a class="card sprint3" href="FLOW-skadesrapporter-sprint3.html">
+      <div class="num">⭐ SPRINT 3 (NYT)</div>
+      <h2>Se Alle Skadesrapporter</h2>
+      <p>Det 4. flow tilføjet efter aflevering. Service-laget plus JOIN på Employee.</p>
+      <div class="arrow">Åbn animation →</div>
+    </a>
+  </div>
+
+  <div class="section-title">📐 Diagrammer & proces</div>
+  <div class="grid">
+    <a class="card" href="UML-DIAGRAMMER.html" style="--c:#c084fc">
+      <div class="num">UML</div>
+      <h2>UML Diagrammer</h2>
+      <p>Class · Sequence · Use Case · Activity · ER. Visualiseret med dit projekt.</p>
+      <div class="arrow">Åbn animation →</div>
+    </a>
+    <a class="card" href="SCRUM-PROCES.html" style="--c:#fbbf24">
+      <div class="num">SCRUM</div>
+      <h2>Scrum-processen</h2>
+      <p>End-to-end: Roller, events, artefakter, PSI - 12 trin igennem.</p>
+      <div class="arrow">Åbn animation →</div>
+    </a>
+  </div>
+</body>
+</html>
